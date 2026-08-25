@@ -1,5 +1,5 @@
-/* Flash Stock V4.1.4 — modernização leve da home
-   Sem GSAP/Lenis, sem canvas e sem filtros pesados em mobile. */
+/* Flash Stock V4.1.5 — mais imagens + efeitos leves com scroll
+   Mantém o visual moderno sem voltar a ficar pesado. */
 
 :root{
   --fs-glass:rgba(9,24,47,.62);
@@ -7,7 +7,6 @@
   --fs-soft-shadow:0 24px 70px rgba(0,0,0,.28);
 }
 
-/* Imagens originais do template */
 .template-visual{
   display:block;
   width:100%;
@@ -18,7 +17,6 @@
 }
 .template-visual.is-fallback{filter:saturate(.95)}
 
-/* Hero com mais profundidade sem efeitos caros */
 .hero-right{position:relative;isolation:isolate}
 #scene3D{
   background:
@@ -35,9 +33,11 @@
   z-index:3;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 -100px 120px rgba(3,8,16,.18);
 }
-#scene3D .iso-tilt{
-  transition:transform .35s cubic-bezier(.2,.7,.2,1);
-  transform:perspective(1100px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg));
+#scene3D .iso-tilt,
+#showroom3D .iso-tilt{
+  transition:transform .22s linear;
+  transform:perspective(1100px) translateY(var(--scroll-y,0px)) rotateX(0deg) rotateY(0deg) rotateZ(var(--scroll-rotate,0deg));
+  will-change:transform;
 }
 #scene3D .hero-visual{object-position:center 52%}
 
@@ -68,7 +68,6 @@
 }
 .hero-visual-meta b{color:var(--gold-light);font-family:Montserrat,sans-serif;font-size:12px}
 
-/* Botões mais atuais */
 .hero-buttons a,.cta-buttons a,.btn-header{
   position:relative;
   overflow:hidden;
@@ -86,16 +85,20 @@
   transition:transform .75s ease;
   pointer-events:none;
 }
-@media (hover:hover){
-  .btn-gold:hover::after,.btn-header:hover::after{transform:rotate(18deg) translateX(520%)}
+/* mantém brilho automático sem depender de hover do mouse */
+.btn-gold::after,.btn-header::after{animation:fsSheen 7s ease-in-out infinite 1.4s}
+@keyframes fsSheen{
+  0%,82%,100%{transform:rotate(18deg) translateX(-220%)}
+  12%,18%{transform:rotate(18deg) translateX(520%)}
 }
 
-/* Cards/galeria — profundidade sem blur exagerado */
-.gallery-item{
+.gallery-item,
+.project-card{
   border:1px solid rgba(255,255,255,.07);
   box-shadow:0 18px 50px rgba(0,0,0,.18);
 }
-.gallery-item::before{
+.gallery-item::before,
+.project-card::before{
   content:"";
   position:absolute;
   inset:0;
@@ -104,7 +107,7 @@
   border-radius:inherit;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
 }
-.gallery-item img{filter:saturate(.98) contrast(1.02)}
+.gallery-item img,.project-card img{filter:saturate(.98) contrast(1.02)}
 .gallery-caption{
   padding:10px 14px;
   border-radius:12px;
@@ -116,22 +119,51 @@
   border-color:rgba(229,197,109,.11)!important;
   box-shadow:0 18px 52px rgba(0,0,0,.12);
 }
-@media (hover:hover){
-  .materials article:hover,.number:hover{transform:translateY(-5px);border-color:rgba(229,197,109,.24)!important}
-}
 
-/* Reveal baseado em IntersectionObserver: barato e executado uma vez */
+/* Nova faixa de projetos com mais imagens */
+.project-showcase{padding:110px 0 32px;position:relative}
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+  margin-top:38px;
+}
+.project-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:26px;
+  background:linear-gradient(180deg,rgba(18,40,75,.74),rgba(7,17,33,.96));
+}
+.project-media{
+  position:relative;
+  aspect-ratio:16/12;
+  overflow:hidden;
+  transform:translateY(var(--float-y,0px));
+  transition:transform .2s linear;
+}
+.project-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 52%,rgba(6,13,25,.28) 100%);
+}
+.project-copy{padding:18px 18px 20px;position:relative;z-index:3}
+.project-copy h3{margin:0 0 8px;font-family:Montserrat,sans-serif;font-size:20px;color:#fff}
+.project-copy p{margin:0;color:#c8d2e2;font-size:14px;line-height:1.6}
+
 .fs-reveal{
   opacity:0;
   transform:translateY(18px);
   transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1);
 }
 .fs-reveal.fs-visible{opacity:1;transform:none}
-.gallery-item.fs-reveal:nth-child(2),.materials article.fs-reveal:nth-child(2),.number.fs-reveal:nth-child(2){transition-delay:.06s}
-.gallery-item.fs-reveal:nth-child(3),.materials article.fs-reveal:nth-child(3),.number.fs-reveal:nth-child(3){transition-delay:.11s}
-.gallery-item.fs-reveal:nth-child(4),.materials article.fs-reveal:nth-child(4),.number.fs-reveal:nth-child(4){transition-delay:.16s}
+.gallery-item.fs-reveal:nth-child(2),.materials article.fs-reveal:nth-child(2),.number.fs-reveal:nth-child(2),.project-card.fs-reveal:nth-child(2){transition-delay:.06s}
+.gallery-item.fs-reveal:nth-child(3),.materials article.fs-reveal:nth-child(3),.number.fs-reveal:nth-child(3),.project-card.fs-reveal:nth-child(3){transition-delay:.11s}
+.gallery-item.fs-reveal:nth-child(4),.materials article.fs-reveal:nth-child(4),.number.fs-reveal:nth-child(4),.project-card.fs-reveal:nth-child(4){transition-delay:.16s}
+.gallery-item.fs-reveal:nth-child(5),.project-card.fs-reveal:nth-child(5){transition-delay:.21s}
+.gallery-item.fs-reveal:nth-child(6),.project-card.fs-reveal:nth-child(6){transition-delay:.26s}
 
-/* Compare e notebook ganham acabamento melhor */
 .compare{box-shadow:0 30px 90px rgba(0,0,0,.28)}
 .compare-layer img,.laptop-screen-inner img{filter:saturate(.97) contrast(1.02)}
 .laptop-screen-inner::after{
@@ -142,20 +174,28 @@
   border-radius:8px;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
 }
+/* notebook abre/fecha com scroll */
+.laptop-screen{
+  transform:translateY(calc(var(--screen-lift,0px) * -1)) rotateX(var(--screen-rotate,-96deg)) !important;
+  box-shadow:0 18px 52px rgba(0,0,0,var(--screen-shadow-alpha,.28));
+  transition:transform .18s linear, box-shadow .18s linear;
+  will-change:transform;
+}
 
-/* Navbar: blur pequeno só onde faz sentido */
 .navbar{background:rgba(5,12,23,.82)}
 @supports (backdrop-filter:blur(8px)){
   .navbar{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 }
 
-/* Carregamento: área abaixo da dobra continua usando content-visibility da V4.1 */
 .hero .template-visual{content-visibility:visible}
 
+@media (max-width:1080px){
+  .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media (max-width:900px){
   .hero-visual-meta{left:16px;right:16px;bottom:-14px}
   .hero-visual-meta span{font-size:10px;padding:8px 11px}
-  #scene3D .iso-tilt{transform:none!important}
+  #scene3D .iso-tilt,#showroom3D .iso-tilt{transform:none!important}
 }
 
 @media (max-width:640px){
@@ -166,10 +206,12 @@
   .gallery-zoom{opacity:1;transform:none}
   .navbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
   .fs-reveal{transform:translateY(12px)}
+  .project-grid{grid-template-columns:1fr;gap:16px}
+  .project-card{border-radius:20px}
 }
 
 @media (prefers-reduced-motion:reduce){
-  #scene3D .iso-tilt,.fs-reveal,.template-visual,.gallery-item img{transition:none!important;transform:none!important}
+  #scene3D .iso-tilt,#showroom3D .iso-tilt,.fs-reveal,.template-visual,.gallery-item img,.project-media,.laptop-screen{transition:none!important;transform:none!important;animation:none!important}
   .fs-reveal{opacity:1!important}
   .btn-gold::after,.btn-header::after{display:none}
 }

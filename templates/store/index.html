@@ -284,6 +284,60 @@
   </div>
 </section>
 
+<section class="project-showcase" id="projetos">
+  <div class="container">
+    <div class="section-title">
+      <span>PROJETOS EM DESTAQUE</span>
+      <h2>Mais referências para você imaginar o seu ambiente.</h2>
+      <p>Selecionamos ambientes inspiradores para mostrar como diferentes estilos podem ganhar vida com planejamento, acabamento e projeto 3D.</p>
+    </div>
+
+    <div class="project-grid">
+      <article class="project-card">
+        <div class="project-media">
+          <img class="template-visual" src="https://i.postimg.cc/xTWrRs45/Chat-GPT-Image-13-de-jul-de-2026-03-02-55.png" alt="Cozinha contemporânea planejada" loading="lazy" decoding="async" width="900" height="900" {% if featured and featured[0].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}"{% endif %}>
+        </div>
+        <div class="project-copy"><h3>Cozinha contemporânea</h3><p>Linhas limpas, composição sofisticada e projeto pensado para o fluxo do dia a dia.</p></div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-media">
+          <img class="template-visual" src="https://i.postimg.cc/c1b6dmVx/d406fe99-ef73-4f1c-bdc8-f64905f09418.png" alt="Cozinha finalizada com marcenaria sob medida" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 1 and featured[1].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}"{% endif %}>
+        </div>
+        <div class="project-copy"><h3>Acabamento final</h3><p>Do conceito à entrega final com execução precisa, elegância e aproveitamento total do espaço.</p></div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-media">
+          <img class="template-visual" src="https://i.postimg.cc/B6TMcbHF/Chat-GPT-Image-13-de-jul-de-2026-01-53-36.png" alt="Projeto 3D de dormitório planejado" loading="lazy" decoding="async" width="900" height="650" {% if featured|length > 2 and featured[2].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}"{% endif %}>
+        </div>
+        <div class="project-copy"><h3>Projeto 3D realista</h3><p>Você aprova cada detalhe antes da produção com uma visualização clara do ambiente.</p></div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-media">
+          <img class="template-visual" src="https://i.postimg.cc/zGq5nHhX/Chat-GPT-Image-13-de-jul-de-2026-01-48-22.png" alt="Cozinha planejada de alto padrão" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 3 and featured[3].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[3].cover_image.id) }}"{% endif %}>
+        </div>
+        <div class="project-copy"><h3>Alto padrão</h3><p>Composição de volumes, metais e iluminação para criar uma cozinha marcante e funcional.</p></div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-media">
+          <img class="template-visual" src="https://i.postimg.cc/1z6TLn9B/81c9ae1a-4b62-40b4-bacd-52cf33bf0800.jpg" alt="Dormitório contemporâneo sob medida" loading="lazy" decoding="async" width="700" height="900" {% if featured|length > 4 and featured[4].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[4].cover_image.id) }}"{% endif %}>
+        </div>
+        <div class="project-copy"><h3>Dormitório sob medida</h3><p>Conforto, organização e identidade visual em um ambiente desenhado para a rotina do cliente.</p></div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-media">
+          <img class="template-visual" src="https://i.postimg.cc/4dwZ2fTg/Chat-GPT-Image-13-de-jul-de-2026-02-27-54.png" alt="Living integrado com ilha planejada" loading="lazy" decoding="async" width="1000" height="650" {% if featured|length > 5 and featured[5].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[5].cover_image.id) }}"{% endif %}>
+        </div>
+        <div class="project-copy"><h3>Living integrado</h3><p>Ambientes conectados com presença, leveza e uma leitura contemporânea do espaço.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="showroom" id="showroom">
   <div class="container showroom-grid">
     <div class="showroom-left">
