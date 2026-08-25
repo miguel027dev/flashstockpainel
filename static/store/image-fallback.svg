@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Flash Stock">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081b3a"/>
+      <stop offset="1" stop-color="#050c17"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="20%" r="70%">
+      <stop offset="0" stop-color="#c8a34d" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#c8a34d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#glow)"/>
+  <g fill="none" stroke="#e5c56d" stroke-opacity=".16">
+    <path d="M80 620 410 430l270 156 310-179"/>
+    <path d="M80 680 410 490l270 156 310-179"/>
+    <circle cx="940" cy="170" r="110"/>
+    <circle cx="940" cy="170" r="165"/>
+  </g>
+  <text x="80" y="150" fill="#e5c56d" font-family="Arial,sans-serif" font-size="28" font-weight="700" letter-spacing="8">FLASH STOCK</text>
+  <text x="80" y="205" fill="#fff" fill-opacity=".88" font-family="Arial,sans-serif" font-size="22">Projetos sob medida</text>
+</svg>

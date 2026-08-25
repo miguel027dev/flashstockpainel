@@ -1,12 +1,15 @@
-const CACHE='flashstock-erp-v4-1';
+const CACHE='flashstock-erp-v4-1-4';
 const CORE=[
   '/static/css/app.css',
   '/static/css/login.css',
   '/static/css/shared.css',
   '/static/css/home-original.css',
+  '/static/css/home-modern-lite.css',
   '/static/js/app.js',
   '/static/js/shared.js',
   '/static/js/home.js',
+  '/static/js/home-modern-lite.js',
+  '/static/store/image-fallback.svg',
   '/static/icon.svg'
 ];
 self.addEventListener('install',event=>{

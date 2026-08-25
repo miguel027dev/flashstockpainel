@@ -8,6 +8,10 @@
 <meta name="description" content="Projetos exclusivos de móveis planejados, cozinhas, closets, dormitórios e ambientes personalizados.">
 <meta name="theme-color" content="#050C17">
 
+<!-- Imagens originais do template: pré-conexão sem bloquear a entrada -->
+<link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+<link rel="preload" as="image" href="https://i.postimg.cc/xTWrRs45/Chat-GPT-Image-13-de-jul-de-2026-03-02-55.png" fetchpriority="high">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -15,6 +19,7 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/shared.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home-original.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home-modern-lite.css') }}">
 </head>
 <body>
 
@@ -81,7 +86,11 @@
     </div>
 
     <div class="hero-right">
-      <div id="scene3D"><div class="iso-wrap"><div class="iso-tilt">{% if featured and featured[0].cover_image %}<img src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}" alt="{{ featured[0].name }}" fetchpriority="high" decoding="async" width="900" height="900">{% else %}<div class="visual-placeholder hero-placeholder"><span>FLASH STOCK</span><b>Projeto sob medida</b><small>Design • precisão • funcionalidade</small></div>{% endif %}</div></div></div>
+      <div id="scene3D"><div class="iso-wrap"><div class="iso-tilt"><img class="template-visual hero-visual" src="https://i.postimg.cc/xTWrRs45/Chat-GPT-Image-13-de-jul-de-2026-03-02-55.png" alt="Cozinha planejada Flash Stock em render 3D" fetchpriority="high" decoding="async" width="900" height="900" {% if featured and featured[0].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}"{% endif %}></div></div></div>
+      <div class="hero-visual-meta" aria-hidden="true">
+        <span><b>3D</b> visualização antes da produção</span>
+        <span><b>100%</b> projeto sob medida</span>
+      </div>
     </div>
   </div>
 
@@ -168,7 +177,7 @@
 
     <div class="compare" id="compareKitchen">
       <div class="compare-layer compare-before" id="compareBeforeLayer"><div class="iso-wrap"><div class="iso-tilt"><svg class="iso-svg" viewBox="90 240 470 430" xmlns="http://www.w3.org/2000/svg"><path class="iso-floor" d="M 300.0,426.1 L 502.6,543.1 L 345.0,634.1 L 142.4,517.1 Z"/><g class="iso-grp iso-cabinets"><path class="iso-top" d="M 300.0,373.0 L 331.5,391.2 L 196.4,469.2 L 164.9,451.0 Z"/><path class="iso-right" d="M 300.0,430.2 L 331.5,448.4 L 331.5,391.2 L 300.0,373.0 Z"/><path class="iso-left" d="M 300.0,430.2 L 164.9,508.2 L 164.9,451.0 L 300.0,373.0 Z"/><path class="iso-top" d="M 294.6,376.1 L 438.7,459.3 L 407.2,477.5 L 263.1,394.3 Z"/><path class="iso-right" d="M 294.6,433.3 L 438.7,516.5 L 438.7,459.3 L 294.6,376.1 Z"/><path class="iso-left" d="M 294.6,433.3 L 263.1,451.5 L 263.1,394.3 L 294.6,376.1 Z"/></g><g class="iso-grp iso-wallcab"><path class="iso-top" d="M 294.8,303.6 L 420.9,376.4 L 398.4,389.4 L 272.3,316.6 Z"/><path class="iso-right" d="M 294.8,340.0 L 420.9,412.8 L 420.9,376.4 L 294.8,303.6 Z"/><path class="iso-left" d="M 294.8,340.0 L 272.3,353.0 L 272.3,316.6 L 294.8,303.6 Z"/></g><g class="iso-grp iso-island"><path class="iso-top" d="M 301.6,380.5 L 378.1,424.7 L 337.6,448.1 L 261.0,403.9 Z"/><path class="iso-right" d="M 301.6,432.5 L 378.1,476.7 L 378.1,424.7 L 301.6,380.5 Z"/><path class="iso-left" d="M 301.6,432.5 L 261.0,455.9 L 261.0,403.9 L 301.6,380.5 Z"/><path class="iso-top" d="M 301.6,375.6 L 387.1,425.0 L 337.6,453.6 L 252.0,404.2 Z"/><path class="iso-right" d="M 301.6,380.3 L 387.1,429.7 L 387.1,425.0 L 301.6,375.6 Z"/><path class="iso-left" d="M 301.6,380.3 L 252.0,408.9 L 252.0,404.2 L 301.6,375.6 Z"/></g><g class="iso-grp iso-counters"><path class="iso-top" d="M 294.6,371.7 L 447.7,460.1 L 409.5,482.2 L 256.4,393.8 Z"/><path class="iso-right" d="M 294.6,375.9 L 447.7,464.3 L 447.7,460.1 L 294.6,371.7 Z"/><path class="iso-left" d="M 294.6,375.9 L 256.4,398.0 L 256.4,393.8 L 294.6,371.7 Z"/><path class="iso-top" d="M 300.0,368.6 L 338.3,390.7 L 194.2,473.9 L 155.9,451.8 Z"/><path class="iso-right" d="M 300.0,372.8 L 338.3,394.9 L 338.3,390.7 L 300.0,368.6 Z"/><path class="iso-left" d="M 300.0,372.8 L 155.9,456.0 L 155.9,451.8 L 300.0,368.6 Z"/></g><g class="iso-grp iso-pendants"><line class="iso-pendant-wire" x1="301.6" y1="266.8" x2="301.6" y2="355.2"/><ellipse class="iso-pendant-shade" cx="301.6" cy="355.2" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="301.6" cy="360.2" r="4"/><line class="iso-pendant-wire" x1="302.7" y1="267.4" x2="302.7" y2="355.8"/><ellipse class="iso-pendant-shade" cx="302.7" cy="355.8" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="302.7" cy="360.8" r="4"/></g><ellipse class="iso-glow" cx="302.0" cy="433.6" rx="150" ry="70"/></svg></div></div></div>
-      <div class="compare-layer compare-after" id="compareAfterLayer"><div class="iso-wrap"><div class="iso-tilt">{% if featured|length > 1 and featured[1].cover_image %}<img src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}" alt="{{ featured[1].name }}" loading="lazy" decoding="async" width="900" height="700">{% else %}<div class="visual-placeholder"><span>DEPOIS</span><b>Ambiente finalizado</b></div>{% endif %}</div></div></div>
+      <div class="compare-layer compare-after" id="compareAfterLayer"><div class="iso-wrap"><div class="iso-tilt"><img class="template-visual" src="https://i.postimg.cc/c1b6dmVx/d406fe99-ef73-4f1c-bdc8-f64905f09418.png" alt="Cozinha Flash Stock finalizada" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 1 and featured[1].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}"{% endif %}></div></div></div>
       <div class="compare-handle-line"></div>
       <div class="compare-handle">↔</div>
       <span class="compare-label before">Antes</span>
@@ -265,7 +274,7 @@
     <div class="laptop-stage">
       <div class="laptop">
         <div class="laptop-screen">
-          <div class="laptop-screen-inner" id="laptopScene"><div class="iso-wrap"><div class="iso-tilt">{% if featured|length > 2 and featured[2].cover_image %}<img src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}" alt="{{ featured[2].name }}" loading="lazy" decoding="async" width="900" height="650">{% else %}<div class="visual-placeholder"><span>PROJETO 3D</span><b>Visualize antes de produzir</b></div>{% endif %}</div></div></div>
+          <div class="laptop-screen-inner" id="laptopScene"><div class="iso-wrap"><div class="iso-tilt"><img class="template-visual" src="https://i.postimg.cc/B6TMcbHF/Chat-GPT-Image-13-de-jul-de-2026-01-53-36.png" alt="Projeto de móveis em tela 3D" loading="lazy" decoding="async" width="900" height="650" {% if featured|length > 2 and featured[2].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}"{% endif %}></div></div></div>
         </div>
         <div class="laptop-base"></div>
       </div>
@@ -337,13 +346,13 @@
 
     <div class="gallery-grid">
       <div class="gallery-item large" data-caption="Cozinha Planejada — Alto Padrão">
-        {% if featured and featured[0].cover_image %}<img src="{{url_for('product_image_media',image_id=featured[0].cover_image.id)}}" alt="{{featured[0].name}}" loading="lazy" decoding="async" width="900" height="700">{% else %}<div class="visual-placeholder"><span>COZINHA</span><b>Projeto planejado</b></div>{% endif %}
+        <img class="template-visual" src="https://i.postimg.cc/zGq5nHhX/Chat-GPT-Image-13-de-jul-de-2026-01-48-22.png" alt="Cozinha planejada de alto padrão" loading="lazy" decoding="async" width="900" height="700" {% if featured and featured[0].cover_image %}data-fallback-src="{{url_for('product_image_media',image_id=featured[0].cover_image.id)}}"{% endif %}>
         <span class="gallery-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
         <span class="gallery-caption">Cozinha Planejada — Alto Padrão</span>
       </div>
 
       <div class="gallery-item tall" data-caption="Dormitório Contemporâneo">
-        {% if featured|length > 1 and featured[1].cover_image %}<img src="{{url_for('product_image_media',image_id=featured[1].cover_image.id)}}" alt="{{featured[1].name}}" loading="lazy" decoding="async" width="700" height="900">{% else %}<div class="visual-placeholder"><span>DORMITÓRIO</span><b>Ambiente contemporâneo</b></div>{% endif %}
+        <img class="template-visual" src="https://i.postimg.cc/1z6TLn9B/81c9ae1a-4b62-40b4-bacd-52cf33bf0800.jpg" alt="Dormitório contemporâneo planejado" loading="lazy" decoding="async" width="700" height="900" {% if featured|length > 1 and featured[1].cover_image %}data-fallback-src="{{url_for('product_image_media',image_id=featured[1].cover_image.id)}}"{% endif %}>
         <span class="gallery-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
         <span class="gallery-caption">Dormitório Contemporâneo</span>
       </div>
@@ -365,7 +374,7 @@
       </div>
 
       <div class="gallery-item wide" data-caption="Living Integrado com Ilha">
-        {% if featured|length > 2 and featured[2].cover_image %}<img src="{{url_for('product_image_media',image_id=featured[2].cover_image.id)}}" alt="{{featured[2].name}}" loading="lazy" decoding="async" width="1000" height="650">{% else %}<div class="visual-placeholder"><span>LIVING</span><b>Ambiente integrado</b></div>{% endif %}
+        <img class="template-visual" src="https://i.postimg.cc/4dwZ2fTg/Chat-GPT-Image-13-de-jul-de-2026-02-27-54.png" alt="Living integrado com ilha planejada" loading="lazy" decoding="async" width="1000" height="650" {% if featured|length > 2 and featured[2].cover_image %}data-fallback-src="{{url_for('product_image_media',image_id=featured[2].cover_image.id)}}"{% endif %}>
         <span class="gallery-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
         <span class="gallery-caption">Living Integrado com Ilha</span>
       </div>
@@ -435,6 +444,7 @@
 
 <script src="{{ url_for('static', filename='js/shared.js') }}"></script>
 <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<script src="{{ url_for('static', filename='js/home-modern-lite.js') }}" defer></script>
 
 </body>
 </html>
