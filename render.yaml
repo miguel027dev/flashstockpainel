@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: flashstock-erp
+    runtime: python
+    plan: starter
+    region: virginia
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: bash scripts/start_render.sh
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    disk:
+      name: flashstock-data
+      mountPath: /var/data/flashstock
+      sizeGB: 10
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: COMPANY_NAME
+        value: Flash Stock
+      - key: DATA_DIR
+        value: /var/data/flashstock
+      - key: SQLITE_PATH
+        value: /var/data/flashstock/flashstock.sqlite3
+      - key: BACKUP_DIR
+        value: /var/data/flashstock/backups
+      - key: AUTO_CREATE_DB
+        value: "0"
+      - key: AUTO_BACKUP_ENABLED
+        value: "1"
+      - key: AUTO_BACKUP_INTERVAL_SECONDS
+        value: "1800"
+      - key: AUTO_BACKUP_KEEP
+        value: "96"
+      - key: BACKUP_MAX_STORAGE_MB
+        value: "4096"
+      - key: SESSION_COOKIE_SECURE
+        value: "1"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: GUNICORN_THREADS
+        value: "4"

@@ -1,0 +1,68 @@
+MENU = [
+    ("PRINCIPAL", [("Dashboard", "/dashboard")]),
+    ("COMERCIAL", [
+        ("Pedidos de Venda", "/pedidos"), ("Solicitações do Site", "/solicitacoes-site"), ("Campanhas", "/cadastro/campanhas"),
+        ("Catálogo interno", "/admin/catalogo"), ("Etiquetas de Produto", "/etiquetas"),
+        ("Pedido de Serviço", "/servicos"), ("Troca de Código", "/troca-codigo"),
+        ("Clientes", "/clientes"), ("Situações do Pedido", "/cadastro/situacoes-pedido"),
+        ("Trocas e Devoluções", "/devolucoes"), ("Cancelamentos", "/cancelamentos"),
+        ("Bloqueio de Pedido", "/pedidos?filtro=bloqueados"), ("Motivos de Bloqueio", "/cadastro/motivos-bloqueio"),
+    ]),
+    ("COTAS E COMISSÕES", [
+        ("Comissões", "/comissoes"), ("Painel de Comissões", "/comissoes/painel"),
+        ("Projeção de Vendas", "/relatorios/projecao"), ("Desconto", "/descontos"),
+        ("Gerentes", "/gerentes"),
+    ]),
+    ("CADASTROS", [
+        ("Produtos", "/produtos"), ("Categorias", "/cadastro/categorias"),
+        ("Domínios (listas)", "/cadastro/dominios"), ("Subcategorias", "/cadastro/subcategorias"),
+        ("Marcas", "/cadastro/marcas"), ("Modelos", "/cadastro/modelos"),
+        ("Origens de Fornecedor", "/cadastro/origens-fornecedor"), ("Unidades", "/cadastro/unidades"),
+        ("Fornecedores", "/fornecedores"), ("Catálogos Prontos", "/cadastro/catalogos-prontos"),
+        ("Formas de Pagto", "/cadastro/formas-pagamento"), ("Condições de Pagto", "/cadastro/condicoes-pagamento"),
+        ("Cores", "/cadastro/cores"), ("Feriados", "/cadastro/feriados"),
+    ]),
+    ("ESTOQUE", [
+        ("Estoque", "/estoque"), ("Inventário de Loja", "/estoque/inventario"),
+        ("Necessidade de Compra", "/estoque/necessidade"), ("Transferência de Reserva", "/estoque/reservas"),
+        ("Gestão de Pendências", "/pendencias"), ("Sugestão de Compras", "/estoque/sugestoes"),
+    ]),
+    ("COMPRAS", [("Compras (Pedidos/NF)", "/compras")]),
+    ("FINANCEIRO", [
+        ("Gestão de Caixa", "/financeiro/caixa"), ("Contas a Receber", "/financeiro/receber"),
+        ("Recebimento de Pedidos", "/financeiro/recebimentos"), ("Conciliação bancária", "/financeiro/conciliacao"),
+        ("Contas a Pagar", "/financeiro/pagar"), ("Contas/Caixa", "/financeiro/contas"),
+        ("Categorias Financeiras", "/cadastro/categorias-financeiras"), ("Tipos de Despesa", "/cadastro/tipos-despesa"),
+        ("Boletos", "/cadastro/boletos"), ("Centro de Custo", "/cadastro/centros-custo"),
+        ("Borderô de Pagamento", "/cadastro/borderos"), ("Fretes a pagar", "/cadastro/fretes-pagar"),
+    ]),
+    ("LOGÍSTICA", [
+        ("Prontos para entrega", "/logistica/prontos"), ("Romaneios", "/logistica/romaneios"),
+        ("Motivos de Retorno", "/cadastro/motivos-retorno"), ("Transportadoras", "/cadastro/transportadoras"),
+    ]),
+    ("SERVIÇOS", [
+        ("Ordens de Serviço", "/servicos"), ("Tipos de OS", "/cadastro/tipos-os"),
+        ("Agenda de Montagem", "/montagens"), ("Valor de Montagem", "/cadastro/valores-montagem"),
+        ("Pagamentos de Montagem", "/cadastro/pagamentos-montagem"),
+    ]),
+    ("RELATÓRIOS", [("Relatórios", "/relatorios")]),
+    ("JURÍDICO", [("Jurídico", "/cadastro/juridico")]),
+    ("CRM", [("CRM (funil)", "/crm")]),
+    ("CALL CENTER", [("Call Center", "/call-center"), ("Kanban de Pedidos", "/pedidos/kanban")]),
+    ("DIRETOR IA", [("Diretor IA", "/diretor-ia")]),
+    ("PESSOAS & SEGURANÇA", [
+        ("Funcionários", "/funcionarios"), ("Departamentos", "/cadastro/departamentos"),
+        ("Cargos", "/cadastro/cargos"), ("Usuários", "/usuarios"), ("Perfis", "/cadastro/perfis"),
+    ]),
+    ("CONFIGURAÇÕES", [
+        ("Estabelecimentos", "/estabelecimentos"), ("Empresa", "/empresa"),
+        ("Mensagens do Carrinho", "/cadastro/mensagens-carrinho"),
+    ]),
+    ("FISCAL", [
+        ("NF-e", "/fiscal/nfe"), ("CFOPs de Emissão", "/cadastro/cfops"),
+        ("Numeração de NF-e", "/cadastro/numeracao-nfe"),
+    ]),
+    ("CONTRATOS", [("Contratos", "/contratos"), ("Tipos de Contrato", "/cadastro/tipos-contrato")]),
+    ("PORTAL DO MONTADOR", [("Minhas Montagens", "/portal-montador")]),
+    ("AJUDA", [("Manual de Uso", "/ajuda")]),
+]
