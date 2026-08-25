@@ -1,0 +1,61 @@
+{% extends 'store/base.html' %}
+{% block title %}Catálogo | Flash Stock Móveis Planejados{% endblock %}
+{% block description %}Catálogo completo de móveis e ambientes Flash Stock.{% endblock %}
+{% block content %}
+<section class="page-hero" style="padding-bottom:48px">
+  <div class="container">
+    <span class="eyebrow">CATÁLOGO</span>
+    <h1>Projetos e produtos<br>para o seu espaço.</h1>
+    <p>Explore o catálogo integrado ao sistema da Flash Stock. Fotos, medidas, acabamentos e informações são atualizados diretamente pelo painel administrativo.</p>
+  </div>
+</section>
+<section style="padding-top:0">
+  <div class="container">
+    <form class="catalog-tools" method="get">
+      <input name="q" value="{{q}}" placeholder="Buscar por nome, SKU, marca ou modelo...">
+      <select name="ordem" onchange="this.form.submit()">
+        <option value="recentes" {% if sort=='recentes' %}selected{% endif %}>Mais recentes</option>
+        <option value="preco-menor" {% if sort=='preco-menor' %}selected{% endif %}>Menor preço</option>
+        <option value="preco-maior" {% if sort=='preco-maior' %}selected{% endif %}>Maior preço</option>
+        <option value="nome" {% if sort=='nome' %}selected{% endif %}>Nome</option>
+      </select>
+      {% if current_category %}<input type="hidden" name="categoria" value="{{current_category}}">{% endif %}
+    </form>
+    <div class="filter-bar">
+      <a href="{{url_for('store_catalog',q=q,ordem=sort)}}" class="filter-chip {{'active' if not current_category}}">Todos</a>
+      {% for c in categories %}<a href="{{url_for('store_catalog',categoria=c,q=q,ordem=sort)}}" class="filter-chip {{'active' if current_category==c}}">{{c}}</a>{% endfor %}
+    </div>
+    <div class="catalog-summary"><span><strong>{{ total }}</strong> produto{% if total != 1 %}s{% endif %} encontrado{% if total != 1 %}s{% endif %}</span>{% if pages > 1 %}<span>Página {{ page }} de {{ pages }}</span>{% endif %}</div>
+    {% if products %}
+    <div class="grid-3">
+      {% for p in products %}
+      <a href="{{url_for('store_product',product_id=p.id)}}" class="produto-card">
+        <div class="thumb">
+          {% if p.presentation and p.presentation.featured %}<span class="badge">Destaque</span>{% endif %}
+          {% if p.cover_image %}<img src="{{url_for('product_image_media',image_id=p.cover_image.id)}}" alt="{{p.name}}" loading="lazy" decoding="async" width="800" height="600">
+          {% else %}<div class="product-placeholder"><div><i class="bi bi-image"></i><span>Sem imagem</span></div></div>{% endif %}
+        </div>
+        <div class="info">
+          <span class="categoria">{{p.category or 'Flash Stock'}}</span>
+          <h3>{{p.name}}</h3>
+          <p class="desc">{% if p.presentation and p.presentation.catalog_note %}{{p.presentation.catalog_note}}{% elif p.presentation and p.presentation.description %}{{p.presentation.description[:110]}}{% else %}{{p.brand or ''}} {{p.model or ''}}{% endif %}</p>
+          <span class="preco">A partir de {{p.sale_price|money}}</span>
+          <div class="ver-mais">Ver detalhes <span>→</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}<div class="empty-state"><h3>Nenhum produto encontrado</h3><p>Altere os filtros ou volte em breve para conferir novidades.</p></div>{% endif %}
+    {% if pages > 1 %}
+    <nav class="pagination" aria-label="Paginação do catálogo">
+      <a class="page-link {{ 'disabled' if page <= 1 }}" href="{{ url_for('store_catalog',q=q,categoria=current_category,ordem=sort,pagina=page-1) }}" aria-label="Página anterior">←</a>
+      {% set start = [1, page-2]|max %}{% set end = [pages, page+2]|min %}
+      {% if start > 1 %}<a class="page-link" href="{{url_for('store_catalog',q=q,categoria=current_category,ordem=sort,pagina=1)}}">1</a>{% if start > 2 %}<span class="page-link disabled">…</span>{% endif %}{% endif %}
+      {% for n in range(start, end+1) %}<a class="page-link {{ 'active' if n == page }}" href="{{url_for('store_catalog',q=q,categoria=current_category,ordem=sort,pagina=n)}}">{{n}}</a>{% endfor %}
+      {% if end < pages %}{% if end < pages-1 %}<span class="page-link disabled">…</span>{% endif %}<a class="page-link" href="{{url_for('store_catalog',q=q,categoria=current_category,ordem=sort,pagina=pages)}}">{{pages}}</a>{% endif %}
+      <a class="page-link {{ 'disabled' if page >= pages }}" href="{{ url_for('store_catalog',q=q,categoria=current_category,ordem=sort,pagina=page+1) }}" aria-label="Próxima página">→</a>
+    </nav>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

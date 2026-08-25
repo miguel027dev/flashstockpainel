@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Flash Stock | Móveis Planejados</title>
+<meta name="description" content="Projetos exclusivos de móveis planejados, cozinhas, closets, dormitórios e ambientes personalizados.">
+<meta name="theme-color" content="#050C17">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shared.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home-original.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container">
+    <a href="#hero" class="logo">
+      <span class="logo-fallback">FLASH STOCK</span>
+    </a>
+    <nav>
+      <a href="{{ url_for('root') }}" class="active">Início</a>
+      <a href="{{ url_for('store_catalog') }}">Catálogo</a>
+      <a href="#showroom">Ambientes</a>
+      <a href="{{ url_for('store_about') }}">Sobre</a>
+      <a href="#cta">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#cta" class="btn-header">Solicitar Projeto</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-drawer" id="navDrawer">
+  <a href="{{ url_for('root') }}">Início</a>
+  <a href="{{ url_for('store_catalog') }}">Catálogo</a>
+  <a href="#showroom">Ambientes</a>
+  <a href="{{ url_for('store_about') }}">Sobre</a>
+  <a href="#cta">Contato</a>
+  <a href="#cta" class="btn-gold">Solicitar Projeto</a>
+</nav>
+
+<main>
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-blueprint" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="120" x2="1200" y2="480" stroke="#C8A34D" stroke-width="1"/>
+    <line x1="0" y1="640" x2="1200" y2="220" stroke="#C8A34D" stroke-width="1"/>
+    <circle cx="980" cy="180" r="120" fill="none" stroke="#C8A34D" stroke-width="1"/>
+    <circle cx="980" cy="180" r="180" fill="none" stroke="#C8A34D" stroke-width="1"/>
+  </svg>
+  <div class="hero-orbit o1"></div>
+  <div class="hero-orbit o2"></div>
+  <div class="hero-glow"></div>
+
+  <div class="container hero-container">
+    <div class="hero-left">
+      <span class="hero-sub">MÓVEIS PLANEJADOS • DESIGN • ARQUITETURA</span>
+
+      <h1>Toda grande ideia<br>começa com um<br>traço.</h1>
+
+      <p>
+        Criamos ambientes personalizados que unem design,
+        funcionalidade e precisão para transformar espaços
+        em experiências únicas.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#cta" class="btn-gold">Solicitar Projeto 3D</a>
+        <a href="#galeria" class="btn-outline">Conheça nossos projetos</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div id="scene3D"><div class="iso-wrap"><div class="iso-tilt">{% if featured and featured[0].cover_image %}<img src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}" alt="{{ featured[0].name }}" fetchpriority="high" decoding="async" width="900" height="900">{% else %}<div class="visual-placeholder hero-placeholder"><span>FLASH STOCK</span><b>Projeto sob medida</b><small>Design • precisão • funcionalidade</small></div>{% endif %}</div></div></div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" role="button" aria-label="Rolar para baixo"><span></span></div>
+</section>
+
+<section class="story">
+  <div class="sticky">
+    <div class="story-3d">
+      <div id="wireframe"><div class="iso-wrap"><div class="iso-tilt"><svg class="iso-svg" viewBox="90 240 470 430" xmlns="http://www.w3.org/2000/svg"><path class="iso-floor" d="M 300.0,426.1 L 502.6,543.1 L 345.0,634.1 L 142.4,517.1 Z"/><g class="iso-grp iso-cabinets"><path class="iso-top" d="M 300.0,373.0 L 331.5,391.2 L 196.4,469.2 L 164.9,451.0 Z"/><path class="iso-right" d="M 300.0,430.2 L 331.5,448.4 L 331.5,391.2 L 300.0,373.0 Z"/><path class="iso-left" d="M 300.0,430.2 L 164.9,508.2 L 164.9,451.0 L 300.0,373.0 Z"/><path class="iso-top" d="M 294.6,376.1 L 438.7,459.3 L 407.2,477.5 L 263.1,394.3 Z"/><path class="iso-right" d="M 294.6,433.3 L 438.7,516.5 L 438.7,459.3 L 294.6,376.1 Z"/><path class="iso-left" d="M 294.6,433.3 L 263.1,451.5 L 263.1,394.3 L 294.6,376.1 Z"/></g><g class="iso-grp iso-wallcab"><path class="iso-top" d="M 294.8,303.6 L 420.9,376.4 L 398.4,389.4 L 272.3,316.6 Z"/><path class="iso-right" d="M 294.8,340.0 L 420.9,412.8 L 420.9,376.4 L 294.8,303.6 Z"/><path class="iso-left" d="M 294.8,340.0 L 272.3,353.0 L 272.3,316.6 L 294.8,303.6 Z"/></g><g class="iso-grp iso-island"><path class="iso-top" d="M 301.6,380.5 L 378.1,424.7 L 337.6,448.1 L 261.0,403.9 Z"/><path class="iso-right" d="M 301.6,432.5 L 378.1,476.7 L 378.1,424.7 L 301.6,380.5 Z"/><path class="iso-left" d="M 301.6,432.5 L 261.0,455.9 L 261.0,403.9 L 301.6,380.5 Z"/><path class="iso-top" d="M 301.6,375.6 L 387.1,425.0 L 337.6,453.6 L 252.0,404.2 Z"/><path class="iso-right" d="M 301.6,380.3 L 387.1,429.7 L 387.1,425.0 L 301.6,375.6 Z"/><path class="iso-left" d="M 301.6,380.3 L 252.0,408.9 L 252.0,404.2 L 301.6,375.6 Z"/></g><g class="iso-grp iso-counters"><path class="iso-top" d="M 294.6,371.7 L 447.7,460.1 L 409.5,482.2 L 256.4,393.8 Z"/><path class="iso-right" d="M 294.6,375.9 L 447.7,464.3 L 447.7,460.1 L 294.6,371.7 Z"/><path class="iso-left" d="M 294.6,375.9 L 256.4,398.0 L 256.4,393.8 L 294.6,371.7 Z"/><path class="iso-top" d="M 300.0,368.6 L 338.3,390.7 L 194.2,473.9 L 155.9,451.8 Z"/><path class="iso-right" d="M 300.0,372.8 L 338.3,394.9 L 338.3,390.7 L 300.0,368.6 Z"/><path class="iso-left" d="M 300.0,372.8 L 155.9,456.0 L 155.9,451.8 L 300.0,368.6 Z"/></g><g class="iso-grp iso-pendants"><line class="iso-pendant-wire" x1="301.6" y1="266.8" x2="301.6" y2="355.2"/><ellipse class="iso-pendant-shade" cx="301.6" cy="355.2" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="301.6" cy="360.2" r="4"/><line class="iso-pendant-wire" x1="302.7" y1="267.4" x2="302.7" y2="355.8"/><ellipse class="iso-pendant-shade" cx="302.7" cy="355.8" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="302.7" cy="360.8" r="4"/></g><ellipse class="iso-glow" cx="302.0" cy="433.6" rx="150" ry="70"/></svg></div></div></div>
+    </div>
+
+    <div class="story-content">
+      <div class="step active">
+        <span>01</span>
+        <h2>Toda criação começa com uma ideia.</h2>
+        <p>
+          Antes de existir um móvel existe um conceito.
+          Cada projeto nasce da compreensão do seu ambiente,
+          da sua rotina e das possibilidades do espaço.
+        </p>
+      </div>
+
+      <div class="step">
+        <span>02</span>
+        <h2>O desenho ganha forma.</h2>
+        <p>
+          Transformamos referências em projetos técnicos,
+          com proporções, materiais e soluções pensadas
+          exclusivamente para você.
+        </p>
+      </div>
+
+      <div class="step">
+        <span>03</span>
+        <h2>Precisão em cada detalhe.</h2>
+        <p>
+          Cada medida é calculada para aproveitar
+          cada centímetro do ambiente sem abrir mão
+          da elegância e da funcionalidade.
+        </p>
+      </div>
+
+      <div class="step">
+        <span>04</span>
+        <h2>Do projeto ao ambiente real.</h2>
+        <p>
+          Quando tudo está aprovado, o conceito ganha vida
+          através da fabricação, acabamento e instalação profissional.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="transition">
+  <div class="container">
+    <span>FLASH STOCK</span>
+    <h2>Projetamos ambientes. Criamos experiências.</h2>
+    <p>
+      Cada móvel é resultado da combinação entre criatividade,
+      engenharia, materiais de alta qualidade e execução precisa.
+    </p>
+  </div>
+</section>
+
+<section class="quem-somos" id="quemsomos">
+  <div class="container">
+    <span>QUEM SOMOS</span>
+    <h2>Feita para durar, pensada para você.</h2>
+    <p>Flash Stock é uma empresa jovem, fundada com o propósito de inovar no mercado moveleiro. Contamos com uma equipe altamente capacitada, com mais de 12 anos de experiência no setor, o que nos permite unir dinamismo com excelência técnica.</p>
+    <p>Nossa missão é oferecer matéria-prima de alta qualidade, com agilidade na entrega e preços competitivos, sempre comprometidos em superar as expectativas dos nossos clientes.</p>
+    <p>Na Flash Stock, transformamos projetos em realidade com confiança, eficiência e qualidade.</p>
+  </div>
+</section>
+
+<section class="before-after">
+  <div class="container">
+    <div class="section-title" style="margin:0 auto 0;text-align:center;max-width:640px;">
+      <span>ANTES E DEPOIS</span>
+      <h2>Arraste e veja a transformação.</h2>
+      <p>Do ambiente vazio ao projeto assinado pela Flash Stock — tudo pensado em cada centímetro.</p>
+    </div>
+
+    <div class="compare" id="compareKitchen">
+      <div class="compare-layer compare-before" id="compareBeforeLayer"><div class="iso-wrap"><div class="iso-tilt"><svg class="iso-svg" viewBox="90 240 470 430" xmlns="http://www.w3.org/2000/svg"><path class="iso-floor" d="M 300.0,426.1 L 502.6,543.1 L 345.0,634.1 L 142.4,517.1 Z"/><g class="iso-grp iso-cabinets"><path class="iso-top" d="M 300.0,373.0 L 331.5,391.2 L 196.4,469.2 L 164.9,451.0 Z"/><path class="iso-right" d="M 300.0,430.2 L 331.5,448.4 L 331.5,391.2 L 300.0,373.0 Z"/><path class="iso-left" d="M 300.0,430.2 L 164.9,508.2 L 164.9,451.0 L 300.0,373.0 Z"/><path class="iso-top" d="M 294.6,376.1 L 438.7,459.3 L 407.2,477.5 L 263.1,394.3 Z"/><path class="iso-right" d="M 294.6,433.3 L 438.7,516.5 L 438.7,459.3 L 294.6,376.1 Z"/><path class="iso-left" d="M 294.6,433.3 L 263.1,451.5 L 263.1,394.3 L 294.6,376.1 Z"/></g><g class="iso-grp iso-wallcab"><path class="iso-top" d="M 294.8,303.6 L 420.9,376.4 L 398.4,389.4 L 272.3,316.6 Z"/><path class="iso-right" d="M 294.8,340.0 L 420.9,412.8 L 420.9,376.4 L 294.8,303.6 Z"/><path class="iso-left" d="M 294.8,340.0 L 272.3,353.0 L 272.3,316.6 L 294.8,303.6 Z"/></g><g class="iso-grp iso-island"><path class="iso-top" d="M 301.6,380.5 L 378.1,424.7 L 337.6,448.1 L 261.0,403.9 Z"/><path class="iso-right" d="M 301.6,432.5 L 378.1,476.7 L 378.1,424.7 L 301.6,380.5 Z"/><path class="iso-left" d="M 301.6,432.5 L 261.0,455.9 L 261.0,403.9 L 301.6,380.5 Z"/><path class="iso-top" d="M 301.6,375.6 L 387.1,425.0 L 337.6,453.6 L 252.0,404.2 Z"/><path class="iso-right" d="M 301.6,380.3 L 387.1,429.7 L 387.1,425.0 L 301.6,375.6 Z"/><path class="iso-left" d="M 301.6,380.3 L 252.0,408.9 L 252.0,404.2 L 301.6,375.6 Z"/></g><g class="iso-grp iso-counters"><path class="iso-top" d="M 294.6,371.7 L 447.7,460.1 L 409.5,482.2 L 256.4,393.8 Z"/><path class="iso-right" d="M 294.6,375.9 L 447.7,464.3 L 447.7,460.1 L 294.6,371.7 Z"/><path class="iso-left" d="M 294.6,375.9 L 256.4,398.0 L 256.4,393.8 L 294.6,371.7 Z"/><path class="iso-top" d="M 300.0,368.6 L 338.3,390.7 L 194.2,473.9 L 155.9,451.8 Z"/><path class="iso-right" d="M 300.0,372.8 L 338.3,394.9 L 338.3,390.7 L 300.0,368.6 Z"/><path class="iso-left" d="M 300.0,372.8 L 155.9,456.0 L 155.9,451.8 L 300.0,368.6 Z"/></g><g class="iso-grp iso-pendants"><line class="iso-pendant-wire" x1="301.6" y1="266.8" x2="301.6" y2="355.2"/><ellipse class="iso-pendant-shade" cx="301.6" cy="355.2" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="301.6" cy="360.2" r="4"/><line class="iso-pendant-wire" x1="302.7" y1="267.4" x2="302.7" y2="355.8"/><ellipse class="iso-pendant-shade" cx="302.7" cy="355.8" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="302.7" cy="360.8" r="4"/></g><ellipse class="iso-glow" cx="302.0" cy="433.6" rx="150" ry="70"/></svg></div></div></div>
+      <div class="compare-layer compare-after" id="compareAfterLayer"><div class="iso-wrap"><div class="iso-tilt">{% if featured|length > 1 and featured[1].cover_image %}<img src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}" alt="{{ featured[1].name }}" loading="lazy" decoding="async" width="900" height="700">{% else %}<div class="visual-placeholder"><span>DEPOIS</span><b>Ambiente finalizado</b></div>{% endif %}</div></div></div>
+      <div class="compare-handle-line"></div>
+      <div class="compare-handle">↔</div>
+      <span class="compare-label before">Antes</span>
+      <span class="compare-label after">Depois</span>
+      <input type="range" class="compare-range" min="0" max="100" value="50" aria-label="Arraste para comparar antes e depois">
+    </div>
+  </div>
+</section>
+
+<section class="numbers">
+  <div class="container">
+    <div class="number">
+      <h3><span class="num-value">100</span><span class="num-suffix">%</span></h3>
+      <p>Projetos Personalizados</p>
+    </div>
+    <div class="number">
+      <h3><span class="num-value">3</span><span class="num-suffix">D</span></h3>
+      <p>Visualização Antes da Produção</p>
+    </div>
+    <div class="number">
+      <h3><span class="num-value">Premium</span></h3>
+      <p>Materiais Selecionados</p>
+    </div>
+    <div class="number">
+      <h3><span class="num-value">Sob Medida</span></h3>
+      <p>Cada Ambiente é Único</p>
+    </div>
+  </div>
+</section>
+
+<section class="creative-process" id="processo">
+  <div class="container">
+    <div class="section-title">
+      <span>PROCESSO CRIATIVO</span>
+      <h2>Da ideia ao ambiente perfeito.</h2>
+      <p>
+        Cada projeto percorre uma jornada cuidadosamente planejada,
+        garantindo que o resultado final seja exclusivo para cada cliente.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-number">01</div>
+        <div class="timeline-content">
+          <h3>Briefing</h3>
+          <p>Entendemos seu espaço, rotina e necessidades para criar uma solução totalmente personalizada.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-number">02</div>
+        <div class="timeline-content">
+          <h3>Conceito</h3>
+          <p>Desenvolvemos referências, estilo e composição do ambiente.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-number">03</div>
+        <div class="timeline-content">
+          <h3>Projeto 3D</h3>
+          <p>Você visualiza exatamente como ficará antes da fabricação.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-number">04</div>
+        <div class="timeline-content">
+          <h3>Produção</h3>
+          <p>Fabricação utilizando materiais de alta qualidade e acabamento premium.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-number">05</div>
+        <div class="timeline-content">
+          <h3>Instalação</h3>
+          <p>Montagem realizada por profissionais especializados.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="laptop-section">
+  <div class="container" style="text-align:center;">
+    <div class="section-title" style="margin:0 auto 0;max-width:640px;">
+      <span>PROJETO 3D</span>
+      <h2>Veja como ficará antes mesmo da fabricação.</h2>
+      <p>Enquanto você rola a página, o notebook abre e revela o projeto do seu ambiente em 3D.</p>
+    </div>
+
+    <div class="laptop-stage">
+      <div class="laptop">
+        <div class="laptop-screen">
+          <div class="laptop-screen-inner" id="laptopScene"><div class="iso-wrap"><div class="iso-tilt">{% if featured|length > 2 and featured[2].cover_image %}<img src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}" alt="{{ featured[2].name }}" loading="lazy" decoding="async" width="900" height="650">{% else %}<div class="visual-placeholder"><span>PROJETO 3D</span><b>Visualize antes de produzir</b></div>{% endif %}</div></div></div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+    </div>
+
+    <p class="laptop-caption">Aprovado o projeto, <strong>fabricamos exatamente</strong> o que você viu na tela.</p>
+  </div>
+</section>
+
+<section class="showroom" id="showroom">
+  <div class="container showroom-grid">
+    <div class="showroom-left">
+      <span>SHOWROOM DIGITAL</span>
+      <h2>Explore ambientes em uma nova perspectiva.</h2>
+      <p>
+        Navegue por projetos completos, conheça detalhes,
+        materiais e visualize cada ambiente com riqueza de detalhes.
+      </p>
+      <a href="#cta" class="btn-gold">Explorar Projetos</a>
+    </div>
+
+    <div class="showroom-right">
+      <div id="showroom3D"><div class="iso-wrap"><div class="iso-tilt"><svg class="iso-svg" viewBox="90 240 470 430" xmlns="http://www.w3.org/2000/svg"><path class="iso-floor" d="M 300.0,426.1 L 502.6,543.1 L 345.0,634.1 L 142.4,517.1 Z"/><g class="iso-grp iso-cabinets"><path class="iso-top" d="M 300.0,373.0 L 331.5,391.2 L 196.4,469.2 L 164.9,451.0 Z"/><path class="iso-right" d="M 300.0,430.2 L 331.5,448.4 L 331.5,391.2 L 300.0,373.0 Z"/><path class="iso-left" d="M 300.0,430.2 L 164.9,508.2 L 164.9,451.0 L 300.0,373.0 Z"/><path class="iso-top" d="M 294.6,376.1 L 438.7,459.3 L 407.2,477.5 L 263.1,394.3 Z"/><path class="iso-right" d="M 294.6,433.3 L 438.7,516.5 L 438.7,459.3 L 294.6,376.1 Z"/><path class="iso-left" d="M 294.6,433.3 L 263.1,451.5 L 263.1,394.3 L 294.6,376.1 Z"/></g><g class="iso-grp iso-wallcab"><path class="iso-top" d="M 294.8,303.6 L 420.9,376.4 L 398.4,389.4 L 272.3,316.6 Z"/><path class="iso-right" d="M 294.8,340.0 L 420.9,412.8 L 420.9,376.4 L 294.8,303.6 Z"/><path class="iso-left" d="M 294.8,340.0 L 272.3,353.0 L 272.3,316.6 L 294.8,303.6 Z"/></g><g class="iso-grp iso-island"><path class="iso-top" d="M 301.6,380.5 L 378.1,424.7 L 337.6,448.1 L 261.0,403.9 Z"/><path class="iso-right" d="M 301.6,432.5 L 378.1,476.7 L 378.1,424.7 L 301.6,380.5 Z"/><path class="iso-left" d="M 301.6,432.5 L 261.0,455.9 L 261.0,403.9 L 301.6,380.5 Z"/><path class="iso-top" d="M 301.6,375.6 L 387.1,425.0 L 337.6,453.6 L 252.0,404.2 Z"/><path class="iso-right" d="M 301.6,380.3 L 387.1,429.7 L 387.1,425.0 L 301.6,375.6 Z"/><path class="iso-left" d="M 301.6,380.3 L 252.0,408.9 L 252.0,404.2 L 301.6,375.6 Z"/></g><g class="iso-grp iso-counters"><path class="iso-top" d="M 294.6,371.7 L 447.7,460.1 L 409.5,482.2 L 256.4,393.8 Z"/><path class="iso-right" d="M 294.6,375.9 L 447.7,464.3 L 447.7,460.1 L 294.6,371.7 Z"/><path class="iso-left" d="M 294.6,375.9 L 256.4,398.0 L 256.4,393.8 L 294.6,371.7 Z"/><path class="iso-top" d="M 300.0,368.6 L 338.3,390.7 L 194.2,473.9 L 155.9,451.8 Z"/><path class="iso-right" d="M 300.0,372.8 L 338.3,394.9 L 338.3,390.7 L 300.0,368.6 Z"/><path class="iso-left" d="M 300.0,372.8 L 155.9,456.0 L 155.9,451.8 L 300.0,368.6 Z"/></g><g class="iso-grp iso-pendants"><line class="iso-pendant-wire" x1="301.6" y1="266.8" x2="301.6" y2="355.2"/><ellipse class="iso-pendant-shade" cx="301.6" cy="355.2" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="301.6" cy="360.2" r="4"/><line class="iso-pendant-wire" x1="302.7" y1="267.4" x2="302.7" y2="355.8"/><ellipse class="iso-pendant-shade" cx="302.7" cy="355.8" rx="14" ry="6"/><circle class="iso-pendant-bulb" cx="302.7" cy="360.8" r="4"/></g><ellipse class="iso-glow" cx="302.0" cy="433.6" rx="150" ry="70"/></svg></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="materials">
+  <div class="container">
+    <div class="section-title">
+      <span>MATERIAIS</span>
+      <h2>Qualidade em cada detalhe.</h2>
+    </div>
+
+    <div class="materials-grid">
+      <article>
+        <div class="material-image"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>MDF Premium</h3>
+        <p>Alta resistência e acabamento sofisticado.</p>
+      </article>
+
+      <article>
+        <div class="material-image"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l6-16h6l6 16M6 12h12"/></svg></div>
+        <h3>Madeiras Nobres</h3>
+        <p>Texturas naturais para ambientes elegantes.</p>
+      </article>
+
+      <article>
+        <div class="material-image"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 15l4-4 4 4 4-6 4 4"/></svg></div>
+        <h3>Vidros</h3>
+        <p>Leveza, modernidade e sofisticação.</p>
+      </article>
+
+      <article>
+        <div class="material-image"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+        <h3>Ferragens</h3>
+        <p>Sistemas modernos e silenciosos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="galeria">
+  <div class="container">
+    <div class="section-title">
+      <span>PORTFÓLIO</span>
+      <h2>Ambientes que inspiram.</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item large" data-caption="Cozinha Planejada — Alto Padrão">
+        {% if featured and featured[0].cover_image %}<img src="{{url_for('product_image_media',image_id=featured[0].cover_image.id)}}" alt="{{featured[0].name}}" loading="lazy" decoding="async" width="900" height="700">{% else %}<div class="visual-placeholder"><span>COZINHA</span><b>Projeto planejado</b></div>{% endif %}
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+        <span class="gallery-caption">Cozinha Planejada — Alto Padrão</span>
+      </div>
+
+      <div class="gallery-item tall" data-caption="Dormitório Contemporâneo">
+        {% if featured|length > 1 and featured[1].cover_image %}<img src="{{url_for('product_image_media',image_id=featured[1].cover_image.id)}}" alt="{{featured[1].name}}" loading="lazy" decoding="async" width="700" height="900">{% else %}<div class="visual-placeholder"><span>DORMITÓRIO</span><b>Ambiente contemporâneo</b></div>{% endif %}
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+        <span class="gallery-caption">Dormitório Contemporâneo</span>
+      </div>
+
+      <div class="gallery-item why-us">
+        <div class="why-us-inner">
+          <h3>Por que comprar com a Flash Stock?</h3>
+          <ul class="why-list">
+            <li><span class="check">✓</span> Móveis 100% sob medida — projetados exatamente para o seu espaço.</li>
+            <li><span class="check">✓</span> Projeto personalizado em 3D — você visualiza tudo antes de fabricar.</li>
+            <li><span class="check">✓</span> Qualidade direto da fábrica — materiais selecionados e acabamento superior.</li>
+            <li><span class="check">✓</span> Atendimento especializado — acompanhamento do início ao fim.</li>
+            <li><span class="check">✓</span> Compromisso com prazo e montagem — seriedade e pós-venda.</li>
+            <li><span class="check">✓</span> Soluções completas — planejados, colchões e estofados.</li>
+            <li><span class="check">✓</span> O melhor custo-benefício de São Paulo.</li>
+            <li><span class="check">✓</span> A entrega mais rápida de São Paulo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery-item wide" data-caption="Living Integrado com Ilha">
+        {% if featured|length > 2 and featured[2].cover_image %}<img src="{{url_for('product_image_media',image_id=featured[2].cover_image.id)}}" alt="{{featured[2].name}}" loading="lazy" decoding="async" width="1000" height="650">{% else %}<div class="visual-placeholder"><span>LIVING</span><b>Ambiente integrado</b></div>{% endif %}
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+        <span class="gallery-caption">Living Integrado com Ilha</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="cta-overlay"></div>
+  <div class="container">
+    <span>FLASH STOCK</span>
+    <h2>O próximo projeto pode ser o seu.</h2>
+    <p>
+      Agende um atendimento e receba um Projeto 3D
+      desenvolvido especialmente para o seu ambiente.
+    </p>
+
+    <div class="cta-buttons">
+      <a href="https://wa.me/5511969183002" target="_blank" rel="noopener" class="btn-gold">Solicitar Projeto</a>
+      <a href="https://wa.me/5511969183002" target="_blank" rel="noopener" class="btn-outline">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <span class="logo-fallback footer-logo-text">FLASH STOCK</span>
+      <p>Transformando ideias em ambientes exclusivos.</p>
+    </div>
+
+    <div>
+      <h4>Contato</h4>
+      <p><a href="tel:+5511969183002">(11) 96918-3002</a></p>
+      <p><a href="https://instagram.com/flashstockmoveis" target="_blank" rel="noopener">@flashstockmoveis</a></p>
+      <p><a href="mailto:contato@flashstock.com.br">contato@flashstock.com.br</a></p>
+    </div>
+
+    <div>
+      <h4>Endereço</h4>
+      <p>Avenida Paula Ferreira, 2885<br>São Paulo - SP<br>CEP 02915-100</p>
+    </div>
+
+    <div>
+      <h4>Horário</h4>
+      <p>Segunda à Sexta<br>09:00 às 18:00</p>
+      <p style="margin-top:14px;"><a href="{{ url_for('store_catalog') }}">Ver Catálogo</a> · <a href="{{ url_for('store_about') }}">Sobre Nós</a></p>
+    </div>
+  </div>
+  <div class="container" style="text-align:center;margin-top:40px;opacity:.5;font-size:12px;">
+    <a href="{{ url_for('admin_entry') }}" style="color:#8A93A6;">Área Restrita</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/5511969183002" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3.2.8.8-3.1-.2-.3A8.2 8.2 0 1 1 20.2 12 8.2 8.2 0 0 1 12 20.2z"/></svg>
+</a>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">✕</div>
+  <div class="lightbox-inner" id="lightboxInner">
+    <span class="lightbox-caption" id="lightboxCaption"></span>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/shared.js') }}"></script>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+
+</body>
+</html>

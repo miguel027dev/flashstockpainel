@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Backup Global — Flash Stock{% endblock %}
+{% block topbar_title %}Backup e restauração{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <span class="eyebrow">SISTEMA • ACESSO RESTRITO</span>
+    <h1>Backup Global</h1>
+    <p>Protege todo o banco SQLite do ERP: usuários, funcionários, privilégios, produtos e fotos, pedidos, estoque, financeiro, CRM, configurações e demais registros.</p>
+  </div>
+  <form method="post" action="{{ url_for('backup_create') }}">
+    <button class="btn btn-primary" type="submit"><i class="bi bi-cloud-arrow-down-fill"></i> Criar backup agora</button>
+  </form>
+</div>
+
+<div class="grid cards-4">
+  <div class="card stat-card">
+    <div><div class="metric-label">Backup automático</div><div class="metric-value success">Ativo</div><div class="metric-note">verificação a cada {{ interval_minutes }} minutos</div></div>
+    <div class="stat-icon"><i class="bi bi-clock-history"></i></div>
+  </div>
+  <div class="card stat-card">
+    <div><div class="metric-label">Regra inteligente</div><div class="metric-value" style="font-size:1.25rem">Somente se mudou</div><div class="metric-note">não cria ZIP repetido sem alterações</div></div>
+    <div class="stat-icon"><i class="bi bi-activity"></i></div>
+  </div>
+  <div class="card stat-card">
+    <div><div class="metric-label">Backups disponíveis</div><div class="metric-value gold">{{ backups|length }}</div><div class="metric-note">automáticos, manuais e pontos de retorno</div></div>
+    <div class="stat-icon"><i class="bi bi-database-check"></i></div>
+  </div>
+  <div class="card stat-card">
+    <div><div class="metric-label">Último arquivo</div><div class="metric-value" style="font-size:1rem;word-break:break-word">{{ backup_state.get('last_backup_file','Ainda não criado') }}</div><div class="metric-note">SQLite + dados persistentes</div></div>
+    <div class="stat-icon"><i class="bi bi-shield-check"></i></div>
+  </div>
+</div>
+
+<div class="split" style="margin-top:16px">
+  <div class="card">
+    <div class="toolbar" style="justify-content:space-between;margin-bottom:12px">
+      <div><h2 class="section-title">Histórico de backups</h2><p class="muted small">Cada arquivo passa por integrity_check do SQLite antes de ser criado ou restaurado.</p></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Arquivo</th><th>Tipo</th><th>Data</th><th>Tamanho</th><th>Ações</th></tr></thead>
+        <tbody>
+          {% for b in backups %}
+          <tr>
+            <td><b>{{ b.filename }}</b><br><small class="muted">SHA {{ (b.manifest.get('database',{}).get('sha256','')[:12] or '—') }}</small></td>
+            <td><span class="badge {% if b.mode=='auto' %}success{% elif b.mode=='pre-restore' %}warning{% endif %}">{{ b.mode }}</span></td>
+            <td>{{ b.mtime.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+            <td>{{ b.size_bytes|filesize }}</td>
+            <td>
+              <div class="toolbar">
+                <a class="btn btn-sm btn-soft" href="{{ url_for('backup_download', filename=b.filename) }}"><i class="bi bi-download"></i> Baixar</a>
+                <form method="post" action="{{ url_for('backup_restore_saved', filename=b.filename) }}" onsubmit="return confirmBackupRestore(this)">
+                  <input type="hidden" name="confirmation" value="">
+                  <button class="btn btn-sm" type="submit"><i class="bi bi-arrow-counterclockwise"></i> Restaurar</button>
+                </form>
+                <form method="post" action="{{ url_for('backup_delete', filename=b.filename) }}" onsubmit="return confirm('Excluir este arquivo de backup?')">
+                  <button class="btn btn-sm btn-danger" type="submit"><i class="bi bi-trash3"></i></button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5" class="empty">Nenhum backup criado ainda.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">Importar backup global</h2>
+    <p class="muted small">Use apenas arquivos gerados por este módulo. Antes de restaurar, o sistema cria automaticamente um backup de segurança do estado atual.</p>
+    <form method="post" action="{{ url_for('backup_import') }}" enctype="multipart/form-data" class="stack" onsubmit="return confirmBackupImport(this)">
+      <div class="field">
+        <label>Arquivo de backup (.zip)</label>
+        <input type="file" name="backup_file" accept=".zip,application/zip" required>
+      </div>
+      <input type="hidden" name="confirmation" value="">
+      <button class="btn btn-primary" type="submit"><i class="bi bi-upload"></i> Validar e restaurar</button>
+    </form>
+
+    <div class="backup-warning" style="margin-top:16px;padding:14px;border:1px solid rgba(240,195,107,.28);border-radius:14px;background:rgba(240,195,107,.07)">
+      <b><i class="bi bi-exclamation-triangle-fill warning"></i> Restauração global</b>
+      <p class="muted small" style="margin-bottom:0">A restauração substitui os dados atuais pelos dados presentes no backup, incluindo usuários e permissões. Depois dela, será necessário entrar novamente.</p>
+    </div>
+
+    <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--line)">
+      <div class="metric-label">Diretório persistente</div>
+      <code style="display:block;margin-top:8px;word-break:break-all;color:var(--gold-2)">{{ backup_dir }}</code>
+    </div>
+  </div>
+</div>
+
+<script>
+function askRestore(){
+  const value = prompt('Esta ação substitui TODO o estado do sistema. Digite RESTAURAR para continuar:');
+  return value && value.trim().toUpperCase() === 'RESTAURAR' ? value : null;
+}
+function confirmBackupRestore(form){
+  const value = askRestore();
+  if(!value) return false;
+  form.querySelector('input[name="confirmation"]').value = value;
+  return true;
+}
+function confirmBackupImport(form){
+  const value = askRestore();
+  if(!value) return false;
+  form.querySelector('input[name="confirmation"]').value = value;
+  return true;
+}
+</script>
+{% endblock %}

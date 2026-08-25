@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Produtos — Flash Stock ERP{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><span class="eyebrow">CADASTRO & CATÁLOGO</span><h1>Produtos</h1><p>Cadastre produtos completos, fotos, informações comerciais e publicação no catálogo público.</p></div>
+  <div class="toolbar"><a class="btn btn-soft" href="/admin/catalogo"><i class="bi bi-eye"></i> Ver catálogo interno</a><a class="btn btn-soft" href="/catalogo" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Abrir loja</a></div>
+</div>
+
+<div class="grid cards-4" style="margin-bottom:16px">
+  <div class="card stat-card"><div><div class="metric-label">Produtos cadastrados</div><div class="metric-value">{{products|length}}</div><div class="metric-note">itens no banco</div></div><div class="stat-icon"><i class="bi bi-box-seam"></i></div></div>
+  <div class="card stat-card"><div><div class="metric-label">Ativos</div><div class="metric-value success">{{products|selectattr('active')|list|length}}</div><div class="metric-note">disponíveis internamente</div></div><div class="stat-icon"><i class="bi bi-check-circle"></i></div></div>
+  <div class="card stat-card"><div><div class="metric-label">Com foto</div><div class="metric-value gold">{{products|selectattr('cover_image')|list|length}}</div><div class="metric-note">prontos para apresentação</div></div><div class="stat-icon"><i class="bi bi-images"></i></div></div>
+  <div class="card stat-card"><div><div class="metric-label">Publicados</div><div class="metric-value">{{products|selectattr('presentation.public_visible')|list|length}}</div><div class="metric-note">visíveis na loja</div></div><div class="stat-icon"><i class="bi bi-globe2"></i></div></div>
+</div>
+
+<div class="split product-admin-layout">
+  <div>
+    <form class="toolbar card" method="get" style="padding:12px;margin-bottom:12px">
+      <div class="field" style="flex:1;min-width:220px"><input name="q" value="{{request.args.get('q','')}}" placeholder="Buscar por SKU, nome ou marca"></div>
+      <button class="btn"><i class="bi bi-search"></i> Buscar</button>
+      {% if request.args.get('q') %}<a class="btn btn-soft" href="/produtos"><i class="bi bi-x-lg"></i></a>{% endif %}
+    </form>
+    <div class="product-admin-grid">
+      {% for p in products %}
+      <article class="admin-product-card">
+        <div class="admin-product-image">
+          {% if p.cover_image %}<img src="{{url_for('product_image_media',image_id=p.cover_image.id)}}" alt="{{p.name}}">{% else %}<div class="product-no-image"><i class="bi bi-image"></i><span>Sem foto</span></div>{% endif %}
+          <span class="status-overlay {{'on' if p.active else 'off'}}">{{'Ativo' if p.active else 'Inativo'}}</span>
+        </div>
+        <div class="admin-product-body">
+          <div class="admin-product-top"><span class="gold small">{{p.sku}}</span>{% if p.presentation and p.presentation.featured %}<span class="badge warning">Destaque</span>{% endif %}</div>
+          <h3>{{p.name}}</h3>
+          <p>{{p.category or 'Sem categoria'}}{% if p.brand %} • {{p.brand}}{% endif %}</p>
+          <div class="admin-product-prices"><span><small>Venda</small><b>{{p.sale_price|money}}</b></span><span><small>Custo</small><b>{{p.cost_price|money}}</b></span></div>
+          <div class="toolbar"><a class="btn btn-sm btn-primary" href="{{url_for('product_edit',item_id=p.id)}}"><i class="bi bi-pencil-square"></i> Editar</a><a class="btn btn-sm btn-soft" href="{{url_for('store_product',product_id=p.id)}}" target="_blank"><i class="bi bi-eye"></i></a><form method="post" action="/produtos/{{p.id}}/toggle"><button class="btn btn-sm btn-soft">{{'Desativar' if p.active else 'Ativar'}}</button></form></div>
+        </div>
+      </article>
+      {% else %}<div class="card empty">Nenhum produto cadastrado.</div>{% endfor %}
+    </div>
+  </div>
+
+  <form method="post" enctype="multipart/form-data" class="card stack product-create-card">
+    <div><span class="eyebrow">NOVO PRODUTO</span><h2 class="section-title" style="margin-top:8px">Cadastro completo</h2><p class="muted small">Os dados públicos alimentam automaticamente o catálogo da loja.</p></div>
+    <div class="form-grid"><div class="field"><label>SKU *</label><input name="sku" required placeholder="FS-0001"></div><div class="field"><label>Unidade</label><input name="unit" value="UN"></div></div>
+    <div class="field"><label>Nome do produto *</label><input name="name" required placeholder="Ex.: Sofá Milão 2,40m"></div>
+    <div class="form-grid"><div class="field"><label>Categoria</label><input name="category" placeholder="Sala de Estar"></div><div class="field"><label>Subcategoria</label><input name="subcategory" placeholder="Sofás"></div></div>
+    <div class="form-grid"><div class="field"><label>Marca</label><input name="brand"></div><div class="field"><label>Modelo</label><input name="model"></div></div>
+    <div class="form-grid"><div class="field"><label>Cor</label><input name="color"></div><div class="field"><label>Localização no estoque</label><input name="location_code" placeholder="A-03-04-B"></div></div>
+    <div class="field"><label>Fornecedor</label><select name="supplier_id"><option value="">Sem fornecedor</option>{% for s in suppliers %}<option value="{{s.id}}">{{s.name}}</option>{% endfor %}</select></div>
+    <div class="form-grid"><div class="field"><label>Custo</label><input name="cost_price" type="number" step="0.01" value="0"></div><div class="field"><label>Venda / referência</label><input name="sale_price" type="number" step="0.01" value="0"></div></div>
+    <div class="form-grid"><div class="field"><label>Estoque mínimo</label><input name="minimum_stock" type="number" step="0.001" value="0"></div><div class="field"><label>Ponto de reposição</label><input name="reorder_point" type="number" step="0.001" value="0"></div></div>
+    <div class="field"><label>Descrição para o catálogo</label><textarea name="description" placeholder="Descreva diferenciais, uso, estilo e características do produto"></textarea></div>
+    <div class="form-grid"><div class="field"><label>Material</label><input name="material" placeholder="MDF, madeira, linho..."></div><div class="field"><label>Acabamento</label><input name="finish" placeholder="Fosco, amadeirado..."></div></div>
+    <div class="form-grid three"><div class="field"><label>Largura mín. (cm)</label><input name="width_min" type="number" step="0.01"></div><div class="field"><label>Altura mín. (cm)</label><input name="height_min" type="number" step="0.01"></div><div class="field"><label>Prof. mín. (cm)</label><input name="depth_min" type="number" step="0.01"></div></div>
+    <div class="form-grid three"><div class="field"><label>Largura máx. (cm)</label><input name="width_max" type="number" step="0.01"></div><div class="field"><label>Altura máx. (cm)</label><input name="height_max" type="number" step="0.01"></div><div class="field"><label>Prof. máx. (cm)</label><input name="depth_max" type="number" step="0.01"></div></div>
+    <div class="form-grid"><div class="field"><label>Prazo estimado (dias)</label><input name="production_days" type="number" min="0"></div><div class="field"><label>Texto curto do card</label><input name="catalog_note" placeholder="Conforto e acabamento premium"></div></div>
+    <label class="upload-drop"><input id="newProductImages" type="file" name="images" accept="image/jpeg,image/png,image/webp" multiple><i class="bi bi-cloud-arrow-up"></i><span><b>Adicionar fotos do produto</b><small>JPG, PNG ou WebP • até 8 imagens • compressão automática</small></span></label><div id="newProductPreview" class="image-preview-grid"></div>
+    <div class="switch-grid"><label class="switch-line"><input type="checkbox" name="active" checked><span><b>Produto ativo</b><small>Disponível no ERP</small></span></label><label class="switch-line"><input type="checkbox" name="public_visible" checked><span><b>Publicar na loja</b><small>Visível para clientes</small></span></label><label class="switch-line"><input type="checkbox" name="featured"><span><b>Destaque</b><small>Aparece em evidência na home</small></span></label></div>
+    <button class="btn btn-primary"><i class="bi bi-check2-circle"></i> Salvar produto</button>
+  </form>
+</div>
+{% endblock %}
+{% block scripts %}<script>
+const input=document.getElementById('newProductImages'),preview=document.getElementById('newProductPreview');input?.addEventListener('change',()=>{preview.innerHTML='';[...input.files].slice(0,8).forEach(f=>{const img=document.createElement('img');img.src=URL.createObjectURL(f);preview.appendChild(img)})});
+</script>{% endblock %}

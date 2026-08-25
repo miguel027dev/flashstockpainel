@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — Flash Stock{% endblock %}
+{% block content %}
+<div class="dashboard-hero">
+  <div class="dashboard-hero-grid">
+    <div>
+      <span class="login-pill"><i class="bi bi-stars"></i> Dashboard operacional</span>
+      <h1>Visão geral da operação da Flash Stock.</h1>
+      <p>Monitore rapidamente vendas, margem, contas, estoque e pendências mais importantes da loja. O foco desta versão é clareza visual e leitura mais rápida.</p>
+      <div class="toolbar" style="margin-top:18px">
+        <a class="btn btn-primary" href="/pedidos/novo"><i class="bi bi-plus-circle-fill"></i> Novo pedido</a>
+        <a class="btn btn-soft" href="/pendencias"><i class="bi bi-bell-fill"></i> Pendências</a>
+        <a class="btn btn-soft" href="/estoque"><i class="bi bi-boxes"></i> Estoque</a>
+      </div>
+    </div>
+
+    <div class="dashboard-highlight">
+      <div class="highlight-box">
+        <div class="metric-label">Pedidos no mês</div>
+        <div class="metric-value">{{ metrics.orders_month }}</div>
+        <div class="metric-note">volume comercial registrado</div>
+      </div>
+      <div class="highlight-box">
+        <div class="metric-label">Vencidos</div>
+        <div class="metric-value danger">{{ metrics.overdue }}</div>
+        <div class="metric-note">lançamentos em atraso</div>
+      </div>
+      <div class="highlight-box">
+        <div class="metric-label">Estoque em atenção</div>
+        <div class="metric-value warning">{{ metrics.low_stock }}</div>
+        <div class="metric-note">itens próximos da ruptura</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid cards-4">
+  <div class="card stat-card">
+    <div>
+      <div class="metric-label">Faturamento no mês</div>
+      <div class="metric-value gold">{{ metrics.sales_month|money }}</div>
+      <div class="metric-note">{{ metrics.orders_month }} pedidos gerados</div>
+    </div>
+    <div class="stat-icon"><i class="bi bi-currency-dollar"></i></div>
+  </div>
+
+  <div class="card stat-card">
+    <div>
+      <div class="metric-label">Lucro bruto calculado</div>
+      <div class="metric-value success">{{ metrics.profit_month|money }}</div>
+      <div class="metric-note">Margem {{ metrics.margin|num }}%</div>
+    </div>
+    <div class="stat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+  </div>
+
+  <div class="card stat-card">
+    <div>
+      <div class="metric-label">A receber</div>
+      <div class="metric-value">{{ metrics.receivable|money }}</div>
+      <div class="metric-note">{{ metrics.overdue }} lançamentos vencidos</div>
+    </div>
+    <div class="stat-icon"><i class="bi bi-wallet2"></i></div>
+  </div>
+
+  <div class="card stat-card">
+    <div>
+      <div class="metric-label">A pagar</div>
+      <div class="metric-value danger">{{ metrics.payable|money }}</div>
+      <div class="metric-note">{{ metrics.low_stock }} itens em atenção</div>
+    </div>
+    <div class="stat-icon"><i class="bi bi-bank"></i></div>
+  </div>
+</div>
+
+<div class="quick-actions" style="margin-top:16px">
+  <a class="quick-card" href="/clientes"><i class="bi bi-people-fill"></i><span><strong>Clientes</strong><small>cadastro e histórico</small></span></a>
+  <a class="quick-card" href="/financeiro/receber"><i class="bi bi-cash-coin"></i><span><strong>Recebimentos</strong><small>baixas e controle</small></span></a>
+  <a class="quick-card" href="/compras"><i class="bi bi-bag-check-fill"></i><span><strong>Compras</strong><small>pedidos e entradas</small></span></a>
+  <a class="quick-card" href="/portal-montador"><i class="bi bi-tools"></i><span><strong>Montagens</strong><small>agenda e checklist</small></span></a>
+</div>
+
+<div class="split" style="margin-top:16px">
+  <div class="card">
+    <div class="toolbar" style="justify-content:space-between;margin-bottom:10px">
+      <h2 class="section-title">Pedidos recentes</h2>
+      <a class="btn btn-sm btn-soft" href="/pedidos"><i class="bi bi-arrow-right"></i> Ver todos</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Pedido</th><th>Cliente</th><th>Status</th><th>Total</th><th>Margem</th></tr>
+        </thead>
+        <tbody>
+          {% for o in recent_orders %}
+          <tr>
+            <td><a class="gold" href="/pedidos/{{ o.id }}"><b>{{ o.number }}</b></a></td>
+            <td>{{ o.customer.name }}</td>
+            <td><span class="badge">{{ o.status }}</span></td>
+            <td>{{ o.total|money }}</td>
+            <td>{{ o.margin_percent|num }}%</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5" class="empty">Nenhum pedido ainda.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="toolbar" style="justify-content:space-between;margin-bottom:4px">
+      <h2 class="section-title">Precisa de atenção</h2>
+      <a class="btn btn-sm btn-soft" href="/pendencias"><i class="bi bi-list-check"></i> Ver tudo</a>
+    </div>
+    {% for p in pending %}
+      <a class="pending-item" href="{{ p.href }}">
+        <span class="pending-dot {{ p.severity }}"></span>
+        <span><b>{{ p.title }}</b><br><small class="muted">{{ p.detail }}</small></span>
+      </a>
+    {% else %}
+      <div class="empty">Nenhuma pendência crítica.</div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <div class="toolbar" style="justify-content:space-between;margin-bottom:8px">
+    <h2 class="section-title">Funil comercial</h2>
+    <a class="btn btn-sm btn-soft" href="/crm"><i class="bi bi-diagram-3-fill"></i> Abrir CRM</a>
+  </div>
+  <div class="grid cards-3">
+    {% for stage, count in stage_counts.items() %}
+      <div class="card" style="padding:15px;box-shadow:none;background:rgba(255,255,255,.02)">
+        <div class="metric-label">{{ stage }}</div>
+        <div class="metric-value">{{ count }}</div>
+        <div class="progress" style="margin-top:10px"><span style="width: {% if metrics.orders_month %}{{ ((count / (metrics.orders_month if metrics.orders_month else 1))*100)|round(0) }}{% else %}0{% endif %}%"></span></div>
+      </div>
+    {% else %}
+      <div class="muted">Cadastre leads no CRM para acompanhar o funil.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

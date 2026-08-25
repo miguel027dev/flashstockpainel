@@ -1,0 +1,42 @@
+{% extends 'store/base.html' %}
+{% block title %}{{product.name}} | Flash Stock{% endblock %}
+{% block description %}{{ (product.presentation.description if product.presentation else product.name)[:150] }}{% endblock %}
+{% block content %}
+<section class="produto-hero"><div class="container"><div class="breadcrumb"><a href="{{url_for('store_catalog')}}">Catálogo</a> / {% if product.category %}<a href="{{url_for('store_catalog',categoria=product.category)}}">{{product.category}}</a> / {% endif %}{{product.name}}</div></div></section>
+<section style="padding-top:24px">
+  <div class="container grid-2" style="align-items:start">
+    <div class="produto-gallery">
+      <div class="thumbs" id="thumbs">
+        {% for img in product.images %}<img src="{{url_for('product_image_media',image_id=img.id)}}" class="{{'active' if loop.first}}" onclick="trocarImagem(this.src,this)" alt="Foto {{loop.index}} de {{product.name}}" loading="lazy">{% endfor %}
+      </div>
+      <div class="main-img">
+        {% if cover %}<img id="mainImg" src="{{url_for('product_image_media',image_id=cover.id)}}" alt="{{product.name}}">
+        {% else %}<div class="product-placeholder"><div><i class="bi bi-image"></i><span>Sem imagem disponível</span></div></div>{% endif %}
+      </div>
+    </div>
+    <div class="produto-info">
+      <span class="categoria-tag">{{product.category or 'Flash Stock'}}</span>
+      <h1>{{product.name}}</h1>
+      <p class="desc">{{product.presentation.description if product.presentation and product.presentation.description else 'Produto cadastrado no catálogo Flash Stock. Entre em contato para detalhes e personalização.'}}</p>
+      {% set pr=product.presentation %}
+      <div class="spec-grid">
+        <div class="spec-item"><span>SKU</span><strong>{{product.sku}}</strong></div>
+        <div class="spec-item"><span>Marca / modelo</span><strong>{{product.brand or '—'}} {{product.model or ''}}</strong></div>
+        <div class="spec-item"><span>Largura</span><strong>{% if pr %}{{pr.width_min|num}} – {{pr.width_max|num}} cm{% else %}Sob consulta{% endif %}</strong></div>
+        <div class="spec-item"><span>Altura</span><strong>{% if pr %}{{pr.height_min|num}} – {{pr.height_max|num}} cm{% else %}Sob consulta{% endif %}</strong></div>
+        <div class="spec-item"><span>Profundidade</span><strong>{% if pr %}{{pr.depth_min|num}} – {{pr.depth_max|num}} cm{% else %}Sob consulta{% endif %}</strong></div>
+        <div class="spec-item"><span>Material</span><strong>{{pr.material if pr and pr.material else 'Sob consulta'}}</strong></div>
+        <div class="spec-item"><span>Acabamento</span><strong>{{pr.finish if pr and pr.finish else 'Sob consulta'}}</strong></div>
+        <div class="spec-item"><span>Prazo</span><strong>{{(pr.production_days|string ~ ' dias') if pr and pr.production_days else 'Sob consulta'}}</strong></div>
+      </div>
+      <p style="color:var(--gold-light);font-size:1.5rem;font-weight:700">A partir de {{product.sale_price|money}}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <form method="post" action="{{url_for('quote_add',product_id=product.id)}}"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><input type="hidden" name="next" value="{{url_for('quote_cart')}}"><button class="btn-gold" type="submit"><i class="bi bi-bag-plus"></i> Adicionar ao orçamento</button></form>
+        <a href="{{url_for('store_catalog')}}" class="btn-outline">Voltar ao catálogo</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% if related %}<section style="border-top:1px solid var(--border)"><div class="container"><div class="section-title"><span class="eyebrow">VOCÊ TAMBÉM PODE GOSTAR</span><h2>Projetos relacionados</h2></div><div class="grid-3">{% for p in related %}<a href="{{url_for('store_product',product_id=p.id)}}" class="produto-card"><div class="thumb">{% if p.cover_image %}<img src="{{url_for('product_image_media',image_id=p.cover_image.id)}}" alt="{{p.name}}" loading="lazy">{% else %}<div class="product-placeholder"><div><i class="bi bi-image"></i></div></div>{% endif %}</div><div class="info"><span class="categoria">{{p.category or 'Produto'}}</span><h3>{{p.name}}</h3><span class="preco">{{p.sale_price|money}}</span><div class="ver-mais">Ver detalhes <span>→</span></div></div></a>{% endfor %}</div></div></section>{% endif %}
+{% endblock %}
+{% block scripts %}<script>function trocarImagem(src,el){const main=document.getElementById('mainImg');if(main)main.src=src;document.querySelectorAll('#thumbs img').forEach(i=>i.classList.remove('active'));el.classList.add('active')}</script>{% endblock %}

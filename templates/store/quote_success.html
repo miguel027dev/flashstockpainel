@@ -1,0 +1,3 @@
+{% extends 'store/base.html' %}{% block title %}Solicitação enviada — Flash Stock{% endblock %}{% block content %}
+<section class="success-page"><div class="success-box"><div class="success-icon"><i class="bi bi-check2"></i></div><span class="store-eyebrow">SOLICITAÇÃO RECEBIDA</span><h1>Obrigado, {{quote.name}}.</h1><p>Seu orçamento <b>{{quote.number}}</b> foi registrado no sistema da Flash Stock. Nossa equipe poderá acompanhar a solicitação pelo CRM.</p><div class="hero-actions"><a class="store-btn primary" href="{{url_for('store_catalog')}}">Continuar no catálogo</a><a class="store-btn ghost" href="{{url_for('root')}}">Voltar ao início</a></div></div></section>
+{% endblock %}

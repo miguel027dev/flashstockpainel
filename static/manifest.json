@@ -1,0 +1,9 @@
+{
+  "name": "Flash Stock Gestão Integrada",
+  "short_name": "Flash Stock ERP",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#050C17",
+  "theme_color": "#050C17",
+  "icons": [{"src":"/static/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

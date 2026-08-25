@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div><h1>Transferência de Reserva</h1><p>Mova quantidade reservada entre estabelecimentos com histórico e auditoria.</p></div></div>
+<div class="split">
+  <div class="table-wrap"><table><thead><tr><th>Produto</th><th>Estabelecimento</th><th>Físico</th><th>Reservado</th><th>Disponível</th></tr></thead><tbody>
+  {% for s in rows %}<tr><td>{{s.product.name}}</td><td>{{s.establishment.name}}</td><td>{{s.quantity_physical|num}}</td><td class="warning">{{s.quantity_reserved|num}}</td><td>{{s.available|num}}</td></tr>{% else %}<tr><td colspan="5" class="empty">Nenhuma reserva ativa.</td></tr>{% endfor %}
+  </tbody></table></div>
+  <form method="post" class="card stack">
+    <h2 class="section-title">Transferir reserva</h2>
+    <div class="field"><label>Produto</label><select name="product_id" required>{% for p in products %}<option value="{{p.id}}">{{p.sku}} — {{p.name}}</option>{% endfor %}</select></div>
+    <div class="field"><label>Origem</label><select name="source_id" required>{% for e in establishments %}<option value="{{e.id}}">{{e.name}}</option>{% endfor %}</select></div>
+    <div class="field"><label>Destino</label><select name="destination_id" required>{% for e in establishments %}<option value="{{e.id}}">{{e.name}}</option>{% endfor %}</select></div>
+    <div class="field"><label>Quantidade reservada</label><input type="number" min="0.001" step="0.001" name="quantity" required></div>
+    <button class="btn btn-primary">Transferir reserva</button>
+    <small class="muted">A operação cria movimentos de saída/entrada e fica registrada na auditoria.</small>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050C17">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Entrar — Flash Stock</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+  <main class="login-shell">
+    <section class="login-intro" aria-label="Flash Stock Gestão Integrada">
+      <span class="eyebrow">/admin • acesso restrito</span>
+      <h1>Gestão rápida, clara e sem complicação.</h1>
+      <p>Pedidos, estoque, financeiro, compras, logística e montagem em um painel pensado para a rotina da Flash Stock.</p>
+      <div class="login-points" aria-hidden="true">
+        <div class="login-point"><b>Indicadores essenciais</b><small>Visão direta do que precisa de atenção.</small></div>
+        <div class="login-point"><b>Acesso individual</b><small>Cada profissional vê apenas os módulos liberados.</small></div>
+        <div class="login-point"><b>Operação integrada</b><small>Venda, estoque, entrega e montagem conectados.</small></div>
+        <div class="login-point"><b>Mais leve</b><small>Entrada sem bibliotecas externas e sem loader bloqueante.</small></div>
+      </div>
+    </section>
+
+    <section class="login-side">
+      <form class="login-card" method="post" autocomplete="on">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="brand">
+          <div class="brand-mark">FS</div>
+          <div><strong>FLASH STOCK</strong><small>Gestão integrada</small></div>
+        </div>
+        <h2>Acessar painel</h2>
+        <p class="subtitle">Entre com o e-mail e a senha cadastrados pelo administrador.</p>
+
+        {% with msgs=get_flashed_messages(with_categories=true) %}
+          {% for cat,msg in msgs %}<div class="flash {{cat}}" role="alert">{{msg}}</div>{% endfor %}
+        {% endwith %}
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" name="email" required autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="voce@flashstock.com.br" autofocus>
+        </div>
+        <div class="field">
+          <label for="password">Senha</label>
+          <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Digite sua senha">
+        </div>
+        <button class="submit" type="submit">Entrar no sistema</button>
+        <div class="login-meta">O administrador principal define os acessos de cada profissional em <b>Usuários e acessos</b>.</div>
+        <a class="back-link" href="/">← Voltar para a loja</a>
+        <div class="login-version">Flash Stock ERP • entrada otimizada</div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
