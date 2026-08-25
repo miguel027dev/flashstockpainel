@@ -335,48 +335,37 @@
       <p>Uma seleção dos materiais e soluções que aparecem nos nossos ambientes planejados, escolhidos para unir acabamento, durabilidade e estética.</p>
     </div>
 
-    <div class="materials-grid materials-grid--photos">
+    <div class="materials-grid materials-grid--photos materials-grid--three">
       <article class="material-card material-card--mdf">
         <div class="material-photo">
-          <img class="template-visual" src="https://i.postimg.cc/xTWrRs45/Chat-GPT-Image-13-de-jul-de-2026-03-02-55.png" alt="MDF premium aplicado em marcenaria planejada" loading="lazy" decoding="async" width="900" height="900" {% if featured and featured[0].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}"{% endif %}>
+          <img class="template-visual" src="{{ url_for('static', filename='store/materials/material-mdf.png') }}" alt="Textura de MDF usado na base de móveis planejados" loading="lazy" decoding="async" width="1280" height="1280">
           <span>MDF</span>
         </div>
         <div class="material-copy">
           <h3>MDF Premium</h3>
-          <p>Painéis selecionados para móveis sob medida, com ótimo acabamento, estabilidade e variedade de padrões.</p>
+          <p>Base versátil para móveis sob medida, com superfície uniforme, estabilidade e excelente acabamento para pintura e revestimento.</p>
         </div>
       </article>
 
       <article class="material-card material-card--wood">
         <div class="material-photo">
-          <img class="template-visual" src="https://i.postimg.cc/1z6TLn9B/81c9ae1a-4b62-40b4-bacd-52cf33bf0800.jpg" alt="Padrão amadeirado aplicado em painel planejado" loading="lazy" decoding="async" width="700" height="900" {% if featured|length > 1 and featured[1].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}"{% endif %}>
-          <span>MADEIRA</span>
+          <img class="template-visual" src="{{ url_for('static', filename='store/materials/material-wood-panels.png') }}" alt="Painéis amadeirados para marcenaria planejada" loading="lazy" decoding="async" width="1280" height="1280">
+          <span>PAINÉIS</span>
         </div>
         <div class="material-copy">
-          <h3>Padrões Amadeirados</h3>
-          <p>Texturas e tons naturais que trazem aconchego, profundidade e personalidade aos ambientes.</p>
+          <h3>Painéis Amadeirados</h3>
+          <p>Chapas e padrões amadeirados que agregam aconchego, textura visual e presença arquitetônica aos ambientes planejados.</p>
         </div>
       </article>
 
       <article class="material-card material-card--glass">
         <div class="material-photo">
-          <img class="template-visual" src="https://i.postimg.cc/c1b6dmVx/d406fe99-ef73-4f1c-bdc8-f64905f09418.png" alt="Vidro aplicado em armários de cozinha planejada" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 2 and featured[2].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}"{% endif %}>
+          <img class="template-visual" src="{{ url_for('static', filename='store/materials/material-glass.png') }}" alt="Vidros decorativos usados em portas e detalhes de mobiliário" loading="lazy" decoding="async" width="1280" height="1280">
           <span>VIDRO</span>
         </div>
         <div class="material-copy">
           <h3>Vidros e Portas Decorativas</h3>
-          <p>Recursos que deixam a composição mais leve e sofisticada, especialmente em cristaleiras e armários superiores.</p>
-        </div>
-      </article>
-
-      <article class="material-card material-card--hardware">
-        <div class="material-photo">
-          <img class="template-visual" src="https://i.postimg.cc/zGq5nHhX/Chat-GPT-Image-13-de-jul-de-2026-01-48-22.png" alt="Ferragens e sistemas de abertura aplicados em cozinha planejada" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 3 and featured[3].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[3].cover_image.id) }}"{% endif %}>
-          <span>FERRAGENS</span>
-        </div>
-        <div class="material-copy">
-          <h3>Ferragens e Sistemas</h3>
-          <p>Dobradiças, corrediças e soluções de abertura pensadas para uso confortável, silencioso e durável.</p>
+          <p>Aplicações que deixam a composição mais leve e sofisticada, ideais para portas, cristaleiras e detalhes de destaque.</p>
         </div>
       </article>
     </div>
