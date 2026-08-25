@@ -23,6 +23,10 @@ from config import Config
 from extensions import db, migrate
 from menu import MENU
 from models import *
+# Importações explícitas das entidades de controle de acesso.
+# Evita inconsistências em deploys onde imports por wildcard podem não expor
+# as classes esperadas durante o bootstrap inicial.
+from models import Permission, UserAccessProfile, UserPermission
 from services.audit import audit
 from services.erp import (
     recalc_order, add_order_event, reserve_order_stock, release_order_stock, consume_order_stock,
