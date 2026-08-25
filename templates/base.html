@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09111f">
   <link rel="manifest" href="/static/manifest.json">
   <title>{% block title %}Flash Stock ERP{% endblock %}</title>
@@ -92,6 +92,24 @@
       </section>
     </main>
   </div>
+
+  <nav class="mobile-admin-dock" aria-label="Navegação rápida do painel">
+    <a class="mobile-dock-item {% if request.path == '/dashboard' %}active{% endif %}" href="/dashboard" aria-label="Dashboard">
+      <i class="bi bi-grid-1x2-fill"></i><span>Início</span>
+    </a>
+    <button class="mobile-dock-item mobile-search-open" type="button" aria-label="Buscar no sistema">
+      <i class="bi bi-search"></i><span>Buscar</span>
+    </button>
+    <button class="mobile-dock-main mobile-menu-open" type="button" aria-label="Abrir módulos">
+      <i class="bi bi-grid-fill"></i><span>Módulos</span>
+    </button>
+    <a class="mobile-dock-item" href="/" target="_blank" rel="noopener" aria-label="Abrir loja">
+      <i class="bi bi-shop"></i><span>Loja</span>
+    </a>
+    <a class="mobile-dock-item" href="/logout" aria-label="Sair do painel">
+      <i class="bi bi-box-arrow-right"></i><span>Sair</span>
+    </a>
+  </nav>
 
   <div class="search-modal" id="searchModal">
     <div class="search-box">

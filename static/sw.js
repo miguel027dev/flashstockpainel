@@ -1,4 +1,4 @@
-const CACHE='flashstock-erp-v4-1-4';
+const CACHE='flashstock-erp-v4-1-8';
 const CORE=[
   '/static/css/app.css',
   '/static/css/login.css',

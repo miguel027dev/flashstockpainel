@@ -3,3 +3,40 @@
 @media(max-width:900px){.login-shell{grid-template-columns:1fr}.login-intro{padding:28px 20px 8px;min-height:auto}.login-intro h1{font-size:clamp(2rem,10vw,3.2rem);max-width:13ch;margin-top:16px}.login-intro p{font-size:14px}.login-points{display:none}.login-side{border-left:0;padding:18px 18px 30px;backdrop-filter:none}.login-card{padding:22px;border-radius:20px}.eyebrow{font-size:10px}}
 @media(max-width:480px){.login-intro{padding-top:20px}.login-intro h1{font-size:2.25rem}.login-side{padding:14px}.login-card{padding:19px}.brand{margin-bottom:20px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* V4.1.8 — login mobile mais direto */
+@media(max-width:700px){
+  body{min-height:100dvh;background:#07101d}
+  .login-shell{min-height:100dvh;display:flex;flex-direction:column}
+  .login-intro{
+    padding:calc(18px + env(safe-area-inset-top)) 18px 10px;
+    flex:0 0 auto;
+  }
+  .login-intro:before{width:300px;height:300px;right:-180px;top:-170px}
+  .eyebrow{padding:6px 9px;font-size:9px;letter-spacing:.09em}
+  .login-intro h1{font-size:1.72rem;line-height:1.05;max-width:14ch;margin:12px 0 7px}
+  .login-intro p{font-size:11px;line-height:1.5;max-width:38ch;color:#aebdd1}
+  .login-side{
+    flex:1;
+    display:block;
+    padding:8px 12px calc(16px + env(safe-area-inset-bottom));
+    background:transparent;
+  }
+  .login-card{
+    width:100%;
+    max-width:none;
+    padding:18px;
+    border-radius:20px;
+    box-shadow:0 18px 48px rgba(0,0,0,.24);
+  }
+  .brand{margin-bottom:16px}
+  .brand-mark{width:40px;height:40px;border-radius:12px}
+  .login-card h2{font-size:1.45rem}
+  .subtitle{font-size:11px;margin-bottom:17px}
+  .field{margin-bottom:11px}
+  .field input{height:50px;font-size:16px;border-radius:13px}
+  .submit{height:50px;border-radius:13px}
+  .login-meta{font-size:10px;margin-top:13px;padding-top:12px}
+  .back-link{height:44px}
+  .login-version{margin-top:11px}
+}

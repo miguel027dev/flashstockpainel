@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   };
   document.querySelector('.menu-btn')?.addEventListener('click', openMenu);
+  document.querySelector('.mobile-menu-open')?.addEventListener('click', openMenu);
   document.querySelector('.sidebar-close')?.addEventListener('click', closeMenu);
   overlay?.addEventListener('click', closeMenu);
   document.querySelectorAll('.nav-item').forEach(el => el.addEventListener('click', () => {
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelector('.search-trigger')?.addEventListener('click', openSearch);
+  document.querySelector('.mobile-search-open')?.addEventListener('click', openSearch);
   closeSearchBtn?.addEventListener('click', closeSearch);
   modal?.addEventListener('click', e => { if (e.target === modal) closeSearch(); });
   document.addEventListener('keydown', e => {
@@ -81,6 +83,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 180);
   });
+
+  // Em telas pequenas, transforma tabelas administrativas em cards legíveis.
+  document.querySelectorAll('.table-wrap table').forEach(table => {
+    const labels = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+    if (!labels.length) return;
+    table.querySelectorAll('tbody tr').forEach(row => {
+      Array.from(row.children).forEach((cell, index) => {
+        if (cell.tagName !== 'TD' || cell.hasAttribute('colspan')) return;
+        if (!cell.dataset.label) cell.dataset.label = labels[index] || '';
+      });
+    });
+  });
+
+  // Ajuda a indicar a seção ativa no dock sem criar links públicos para o admin.
+  const dock = document.querySelector('.mobile-admin-dock');
+  if (dock) {
+    const active = dock.querySelector('[href="/dashboard"]');
+    if (active && location.pathname !== '/dashboard') active.classList.remove('active');
+  }
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => navigator.serviceWorker.register('/static/sw.js').catch(() => {}));

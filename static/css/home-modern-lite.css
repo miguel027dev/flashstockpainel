@@ -430,3 +430,78 @@
   .project-card::after{display:none}
   .laptop-screen,.laptop-base,.laptop-stage{transform:none!important;filter:none!important}
 }
+
+/* V4.1.7 — materiais com fotografia em vez de ícones */
+.materials-photo-section{padding-top:104px;padding-bottom:104px}
+.materials-photo-section .section-title{max-width:720px}
+.materials-grid--photos{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+  margin-top:38px;
+}
+.materials-grid--photos .material-card{
+  position:relative;
+  overflow:hidden;
+  padding:0;
+  min-height:0;
+  border-radius:24px;
+  background:linear-gradient(180deg,rgba(16,35,66,.88),rgba(7,17,33,.98));
+  border:1px solid rgba(229,197,109,.12)!important;
+  box-shadow:0 24px 65px rgba(0,0,0,.18);
+}
+.material-photo{
+  position:relative;
+  aspect-ratio:16/8.5;
+  overflow:hidden;
+  background:#081528;
+}
+.material-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.015);
+}
+.material-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,12,23,.04) 36%,rgba(5,12,23,.52) 100%);
+}
+.material-photo>span{
+  position:absolute;
+  left:16px;
+  bottom:14px;
+  z-index:2;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(5,12,23,.78);
+  border:1px solid rgba(229,197,109,.22);
+  color:#e5c56d;
+  font:700 9px/1 Montserrat,sans-serif;
+  letter-spacing:.14em;
+}
+.material-copy{padding:20px 20px 22px}
+.material-copy h3{
+  margin:0 0 8px;
+  color:#fff;
+  font:700 20px/1.25 Montserrat,sans-serif;
+}
+.material-copy p{
+  margin:0;
+  color:#bac6d6;
+  font-size:13.5px;
+  line-height:1.65;
+}
+.material-card--mdf .material-photo img{object-position:center 46%}
+.material-card--wood .material-photo img{object-position:center 44%}
+.material-card--glass .material-photo img{object-position:center 38%}
+.material-card--hardware .material-photo img{object-position:center 60%}
+
+@media (max-width:760px){
+  .materials-photo-section{padding-top:82px;padding-bottom:82px}
+  .materials-grid--photos{grid-template-columns:1fr;gap:16px}
+  .materials-grid--photos .material-card{border-radius:20px}
+  .material-photo{aspect-ratio:16/9.2}
+}
