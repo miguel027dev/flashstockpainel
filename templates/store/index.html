@@ -286,54 +286,95 @@
 
 <section class="project-showcase" id="projetos">
   <div class="container">
-    <div class="section-title">
-      <span>PROJETOS EM DESTAQUE</span>
-      <h2>Mais referências para você imaginar o seu ambiente.</h2>
-      <p>Selecionamos ambientes inspiradores para mostrar como diferentes estilos podem ganhar vida com planejamento, acabamento e projeto 3D.</p>
+    <div class="project-heading-row">
+      <div class="section-title">
+        <span>PROJETOS EM DESTAQUE</span>
+        <h2>Ambientes reais, cada um com uma solução diferente.</h2>
+        <p>Projetos pensados para aproveitar melhor cada espaço, com marcenaria sob medida, acabamento cuidadoso e visualização antes da produção.</p>
+      </div>
+      <div class="project-heading-note" aria-hidden="true">
+        <strong>06</strong>
+        <span>referências de ambientes</span>
+      </div>
     </div>
 
-    <div class="project-grid">
-      <article class="project-card">
+    <div class="project-grid" data-project-grid>
+      <article class="project-card project-card--office" data-project-index="01">
         <div class="project-media">
-          <img class="template-visual" src="https://i.postimg.cc/xTWrRs45/Chat-GPT-Image-13-de-jul-de-2026-03-02-55.png" alt="Cozinha contemporânea planejada" loading="lazy" decoding="async" width="900" height="900" {% if featured and featured[0].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}"{% endif %}>
+          <span class="project-badge">HOME OFFICE</span>
+          <img class="template-visual" src="https://i.postimg.cc/xTWrRs45/Chat-GPT-Image-13-de-jul-de-2026-03-02-55.png" alt="Home office planejado com bancada, armários e nichos em madeira" loading="lazy" decoding="async" width="900" height="900" {% if featured and featured[0].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[0].cover_image.id) }}"{% endif %}>
         </div>
-        <div class="project-copy"><h3>Cozinha contemporânea</h3><p>Linhas limpas, composição sofisticada e projeto pensado para o fluxo do dia a dia.</p></div>
+        <div class="project-copy">
+          <span class="project-number">PROJETO 01</span>
+          <h3>Home office planejado</h3>
+          <p>Bancada ampla, armários superiores e nichos integrados para organizar o espaço sem perder leveza visual.</p>
+        </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card project-card--island" data-project-index="02">
         <div class="project-media">
-          <img class="template-visual" src="https://i.postimg.cc/c1b6dmVx/d406fe99-ef73-4f1c-bdc8-f64905f09418.png" alt="Cozinha finalizada com marcenaria sob medida" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 1 and featured[1].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}"{% endif %}>
+          <span class="project-badge">COZINHA</span>
+          <img class="template-visual" src="https://i.postimg.cc/c1b6dmVx/d406fe99-ef73-4f1c-bdc8-f64905f09418.png" alt="Cozinha planejada com ilha central e armários em tom verde" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 1 and featured[1].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[1].cover_image.id) }}"{% endif %}>
         </div>
-        <div class="project-copy"><h3>Acabamento final</h3><p>Do conceito à entrega final com execução precisa, elegância e aproveitamento total do espaço.</p></div>
+        <div class="project-copy">
+          <span class="project-number">PROJETO 02</span>
+          <h3>Cozinha com ilha central</h3>
+          <p>Layout funcional com ilha para preparo e apoio, marcenaria completa e circulação bem distribuída.</p>
+        </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card project-card--closet" data-project-index="03">
         <div class="project-media">
-          <img class="template-visual" src="https://i.postimg.cc/B6TMcbHF/Chat-GPT-Image-13-de-jul-de-2026-01-53-36.png" alt="Projeto 3D de dormitório planejado" loading="lazy" decoding="async" width="900" height="650" {% if featured|length > 2 and featured[2].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}"{% endif %}>
+          <span class="project-badge">DORMITÓRIO</span>
+          <img class="template-visual" src="https://i.postimg.cc/B6TMcbHF/Chat-GPT-Image-13-de-jul-de-2026-01-53-36.png" alt="Roupeiro planejado de portas altas em dormitório" loading="lazy" decoding="async" width="900" height="650" {% if featured|length > 2 and featured[2].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[2].cover_image.id) }}"{% endif %}>
         </div>
-        <div class="project-copy"><h3>Projeto 3D realista</h3><p>Você aprova cada detalhe antes da produção com uma visualização clara do ambiente.</p></div>
+        <div class="project-copy">
+          <span class="project-number">PROJETO 03</span>
+          <h3>Roupeiro sob medida</h3>
+          <p>Portas altas, desenho discreto e aproveitamento vertical para criar mais armazenamento no dormitório.</p>
+        </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card project-card--compact-kitchen" data-project-index="04">
         <div class="project-media">
-          <img class="template-visual" src="https://i.postimg.cc/zGq5nHhX/Chat-GPT-Image-13-de-jul-de-2026-01-48-22.png" alt="Cozinha planejada de alto padrão" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 3 and featured[3].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[3].cover_image.id) }}"{% endif %}>
+          <span class="project-badge">COZINHA</span>
+          <img class="template-visual" src="https://i.postimg.cc/zGq5nHhX/Chat-GPT-Image-13-de-jul-de-2026-01-48-22.png" alt="Cozinha compacta planejada com armários cinza e iluminação embutida" loading="lazy" decoding="async" width="900" height="700" {% if featured|length > 3 and featured[3].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[3].cover_image.id) }}"{% endif %}>
         </div>
-        <div class="project-copy"><h3>Alto padrão</h3><p>Composição de volumes, metais e iluminação para criar uma cozinha marcante e funcional.</p></div>
+        <div class="project-copy">
+          <span class="project-number">PROJETO 04</span>
+          <h3>Cozinha compacta sob medida</h3>
+          <p>Marcenaria em linha única, iluminação de tarefa e módulos desenhados para aproveitar cada centímetro disponível.</p>
+        </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card project-card--tv" data-project-index="05">
         <div class="project-media">
-          <img class="template-visual" src="https://i.postimg.cc/1z6TLn9B/81c9ae1a-4b62-40b4-bacd-52cf33bf0800.jpg" alt="Dormitório contemporâneo sob medida" loading="lazy" decoding="async" width="700" height="900" {% if featured|length > 4 and featured[4].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[4].cover_image.id) }}"{% endif %}>
+          <span class="project-badge">PAINEL DE TV</span>
+          <img class="template-visual" src="https://i.postimg.cc/1z6TLn9B/81c9ae1a-4b62-40b4-bacd-52cf33bf0800.jpg" alt="Painel de TV planejado em madeira com ripado e nicho superior" loading="lazy" decoding="async" width="700" height="900" {% if featured|length > 4 and featured[4].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[4].cover_image.id) }}"{% endif %}>
         </div>
-        <div class="project-copy"><h3>Dormitório sob medida</h3><p>Conforto, organização e identidade visual em um ambiente desenhado para a rotina do cliente.</p></div>
+        <div class="project-copy">
+          <span class="project-number">PROJETO 05</span>
+          <h3>Painel de TV planejado</h3>
+          <p>Madeira, ripado e prateleira superior formando uma composição quente e funcional para o quarto.</p>
+        </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card project-card--premium-kitchen" data-project-index="06">
         <div class="project-media">
-          <img class="template-visual" src="https://i.postimg.cc/4dwZ2fTg/Chat-GPT-Image-13-de-jul-de-2026-02-27-54.png" alt="Living integrado com ilha planejada" loading="lazy" decoding="async" width="1000" height="650" {% if featured|length > 5 and featured[5].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[5].cover_image.id) }}"{% endif %}>
+          <span class="project-badge">ALTO PADRÃO</span>
+          <img class="template-visual" src="https://i.postimg.cc/4dwZ2fTg/Chat-GPT-Image-13-de-jul-de-2026-02-27-54.png" alt="Cozinha planejada de alto padrão com madeira escura, bancada e iluminação linear" loading="lazy" decoding="async" width="1000" height="650" {% if featured|length > 5 and featured[5].cover_image %}data-fallback-src="{{ url_for('product_image_media', image_id=featured[5].cover_image.id) }}"{% endif %}>
         </div>
-        <div class="project-copy"><h3>Living integrado</h3><p>Ambientes conectados com presença, leveza e uma leitura contemporânea do espaço.</p></div>
+        <div class="project-copy">
+          <span class="project-number">PROJETO 06</span>
+          <h3>Cozinha premium integrada</h3>
+          <p>Madeira escura, iluminação linear e bancada contínua para um ambiente sofisticado com presença arquitetônica.</p>
+        </div>
       </article>
+    </div>
+
+    <div class="project-footer-cta">
+      <div><span>SEU ESPAÇO, DO SEU JEITO</span><strong>Quer visualizar o seu projeto antes de fabricar?</strong></div>
+      <a href="#cta" class="btn-gold">Solicitar projeto 3D</a>
     </div>
   </div>
 </section>
@@ -479,9 +520,6 @@
       <p>Segunda à Sexta<br>09:00 às 18:00</p>
       <p style="margin-top:14px;"><a href="{{ url_for('store_catalog') }}">Ver Catálogo</a> · <a href="{{ url_for('store_about') }}">Sobre Nós</a></p>
     </div>
-  </div>
-  <div class="container" style="text-align:center;margin-top:40px;opacity:.5;font-size:12px;">
-    <a href="{{ url_for('admin_entry') }}" style="color:#8A93A6;">Área Restrita</a>
   </div>
 </footer>
 

@@ -222,6 +222,9 @@ def response_performance_headers(response):
     elif path in PUBLIC_EXACT_PATHS or path.startswith(("/catalogo", "/produto/", "/sobre")):
         response.headers.setdefault("Cache-Control", "no-cache")
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
+    # O painel não é divulgado nas páginas públicas e também não deve ser indexado.
+    if path == "/admin" or path.startswith("/admin/"):
+        response.headers.setdefault("X-Robots-Tag", "noindex, nofollow, noarchive")
     return response
 
 
